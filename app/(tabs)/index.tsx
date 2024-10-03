@@ -43,7 +43,7 @@ const HomeScreen: React.FC = () => {
                         </ThemedView>
                         <ThemedView style={styles.header}>
                             <ThemedView style={styles.imgContainer}>
-                                <Image source={require('../../assets/images/comIcon.png')} style={styles.img} />
+                                <Image source={{uri:'https://admin.ipowatch.in/storage/app/public/mainlineipo_images/0MFzk4X9gdr2VSkKtLARn0I2iPM73LGFRj30o7y8.jpg'}} style={styles.img} />
                             </ThemedView>
                             <ThemedView style={styles.headerText}>
                                 <ThemedText type={'title'}>{item.title}</ThemedText>
