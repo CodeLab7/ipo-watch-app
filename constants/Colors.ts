@@ -23,4 +23,9 @@ export const Colors = {
     tabIconDefault: '#9BA1A6',
     tabIconSelected: tintColorDark,
   },
+  bodyBackgroundColor: '#f5f2f3',
+  mainBoardColor: '#c20606',
+  mainBoardTextColor: '#fff',
+  dividerBgColor: '#ddd',
+  btnTextColor: '#f64c00'
 };
