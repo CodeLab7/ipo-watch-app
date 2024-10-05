@@ -12,9 +12,22 @@ import * as WebBrowser from 'expo-web-browser';
 export default function CustomDrawerContent() {
     const router = useRouter();
 
+    const socialMediaLinks = {
+        facebook: "https://www.facebook.com/ipowatchinfo",
+        instagram: "https://www.instagram.com/ipowatch.in/",
+        youtube: "https://www.youtube.com/@IPOWatch",
+        x: "https://x.com/ipowatch_info",
+    }
+
     const shareWithFriends = async () => {
         const imageAsset = Asset.fromModule(require('../assets/images/logo.png'));
         await imageAsset.downloadAsync();
+
+        if (!(await Sharing.isAvailableAsync())) {
+            alert(`Uh oh, sharing isn't available on your platform`);
+            return;
+        }
+
         try {
             await Sharing.shareAsync(imageAsset.localUri || imageAsset.uri, {
                 dialogTitle: 'IPO Watch is an all-in-one IPO app to help investors to get updates on Mainline IPO, SME IPO, Buyback, Right issues, NCD, IPO allotment, Reviews, and subscription. \n https://play.google.com/store/apps/details?id=com.watch.ipo_watch&hl=en_IN',
@@ -36,52 +49,57 @@ export default function CustomDrawerContent() {
 
     const CustomIcon = ({name}: { name: React.ComponentProps<typeof Ionicons>['name'] }) => (
         <View style={styles.roundIconContainer}>
-            <Ionicons name={name} size={24} color="#000" />
+            <Ionicons name={name} size={24} color="#000"/>
         </View>
     );
+
+    const ContactUs = async () => {
+        const email = 'ipowatchinfo@gmail.com';
+        const body = 'Dear IPOWatch user, \n Explain your issue here';
+        const subject = "IPOWatch Support";
+        const mailtoUrl = `mailto:${email}?&subject=${subject}&body=${encodeURIComponent(body)}`;
+
+        Linking.openURL(mailtoUrl).catch((err) => {
+            console.error('Error opening email client:', err);
+        });
+    }
+
     return (
         <ThemedView style={{flex: 1}}>
             <ThemedView style={styles.imgContainer}>
-                <Image style={styles.img} resizeMode={'contain'} source={require('../assets/images/logo.png')} />
+                <Image style={styles.img} resizeMode={'contain'} source={require('../assets/images/logo.png')}/>
             </ThemedView>
             <Drawer.Item label="Home"
-                         icon={() => <CustomIcon name="home" />}
-                         onPress={() => router.push('/(tabs)/')} />
+                         icon={() => <CustomIcon name="home"/>}
+                         onPress={() => router.push('/(tabs)/')}/>
             <Drawer.Item label="Share With Friends"
-                         icon={() => <CustomIcon name="share-social" />}
-                         onPress={() => shareWithFriends()} />
+                         icon={() => <CustomIcon name="share-social"/>}
+                         onPress={() => shareWithFriends()}/>
             <Drawer.Item label="Privacy Policy"
-                         icon={() => <CustomIcon name="shield-checkmark" />}
-                         onPress={() => openInAppBrowser('https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/')} />
+                         icon={() => <CustomIcon name="shield-checkmark"/>}
+                         onPress={() => openInAppBrowser('https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/')}/>
             <Drawer.Item label="Terms & Condition"
-                         icon={() => <CustomIcon name="book-sharp" />}
-                         onPress={() => openInAppBrowser('https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/')} />
+                         icon={() => <CustomIcon name="book-sharp"/>}
+                         onPress={() => openInAppBrowser('https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/')}/>
             <Drawer.Item label="Contact&nbsp;Us"
-                         icon={() => <CustomIcon name="document-text" />}
-                         onPress={() => {
-                             const email = 'ipowatchinfo@gmail.com';
-                             const body = 'IPOWatch Support \n\n Dear IPOWatch user, \n Explain your issue here';
-                             const mailtoUrl = `mailto:${email}?&body=${encodeURIComponent(body)}`;
-
-                             Linking.openURL(mailtoUrl).catch((err) => {
-                                 console.error('Error opening email client:', err);
-                             });
-                         }}/>
+                         icon={() => <CustomIcon name="document-text"/>}
+                         onPress={() => ContactUs()}/>
             <Drawer.Item label="Rate the App"
-                         icon={() => <CustomIcon name="star" />}
-                         onPress={() => openInAppBrowser('https://play.google.com/store/apps/details?id=com.watch.ipo_watch&hl=en_IN')} />
+                         icon={() => <CustomIcon name="star"/>}
+                         onPress={() => openInAppBrowser('https://play.google.com/store/apps/details?id=com.watch.ipo_watch&hl=en_IN')}/>
+
             <ThemedView style={styles.socialIconContainer}>
-                <TouchableRipple onPress={() => openInAppBrowser('https://www.facebook.com/ipowatchinfo')}>
-                    <Avatar.Image size={40} style={styles.iconImg} source={require('../assets/icons/facebook.png')} />
+                <TouchableRipple onPress={() => openInAppBrowser(socialMediaLinks.facebook)}>
+                    <Avatar.Image size={40} style={styles.iconImg} source={require('../assets/icons/facebook.png')}/>
                 </TouchableRipple>
-                <TouchableRipple onPress={() => openInAppBrowser('https://www.instagram.com/ipowatch.in/')}>
-                    <Avatar.Image size={40} style={styles.iconImg} source={require('../assets/icons/instagram.png')} />
+                <TouchableRipple onPress={() => openInAppBrowser(socialMediaLinks.instagram)}>
+                    <Avatar.Image size={40} style={styles.iconImg} source={require('../assets/icons/instagram.png')}/>
                 </TouchableRipple>
-                <TouchableRipple onPress={() => openInAppBrowser('https://www.youtube.com/@IPOWatch')}>
-                    <Avatar.Image size={40} style={styles.iconImg} source={require('../assets/icons/youtube.png')} />
+                <TouchableRipple onPress={() => openInAppBrowser(socialMediaLinks.youtube)}>
+                    <Avatar.Image size={40} style={styles.iconImg} source={require('../assets/icons/youtube.png')}/>
                 </TouchableRipple>
-                <TouchableRipple onPress={() => openInAppBrowser('https://x.com/ipowatch_info')}>
-                    <Avatar.Image size={40} style={styles.iconImg} source={require('../assets/icons/x.png')} />
+                <TouchableRipple onPress={() => openInAppBrowser(socialMediaLinks.x)}>
+                    <Avatar.Image size={40} style={styles.iconImg} source={require('../assets/icons/x.png')}/>
                 </TouchableRipple>
             </ThemedView>
             <ThemedView style={styles.versionText}>
