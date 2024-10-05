@@ -3,11 +3,11 @@ import {Image, StyleSheet, View} from 'react-native';
 import {Avatar, Drawer, TouchableRipple} from 'react-native-paper';
 import {useRouter} from 'expo-router';
 import {ThemedView} from "@/components/ThemedView";
-import * as Linking from 'expo-linking';
 import * as Sharing from 'expo-sharing';
 import {Asset} from "expo-asset";
 import {ThemedText} from "@/components/ThemedText";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import * as WebBrowser from 'expo-web-browser';
 
 export default function CustomDrawerContent() {
     const router = useRouter();
@@ -29,6 +29,14 @@ export default function CustomDrawerContent() {
         }
     };
 
+    const openInAppBrowser = async (url: string) => {
+        try {
+            await WebBrowser.openBrowserAsync(url);
+        } catch (error) {
+            console.error('Error opening browser:', error);
+        }
+    };
+
     const CustomIcon = ({name}: { name: React.ComponentProps<typeof Ionicons>['name'] }) => (
         <View style={styles.roundIconContainer}>
             <Ionicons name={name} size={24} color="#000" />
@@ -47,27 +55,28 @@ export default function CustomDrawerContent() {
                          onPress={() => shareWithFriends()} />
             <Drawer.Item label="Privacy Policy"
                          icon={() => <CustomIcon name="shield-checkmark" />}
-                         onPress={() => Linking.openURL('https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/')} />
+                         onPress={() => openInAppBrowser('https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/')} />
             <Drawer.Item label="Terms & Condition"
                          icon={() => <CustomIcon name="book-sharp" />}
-                         onPress={() => Linking.openURL('https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/')} />
+                         onPress={() => openInAppBrowser('https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/')} />
             <Drawer.Item label="Contact Us"
                          icon={() => <CustomIcon name="document-text" />}
-                         onPress={() => Linking.openURL('https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/')} />
+                         style={{width: '90%'}}
+                         onPress={() => openInAppBrowser('https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/')} />
             <Drawer.Item label="Rate the App"
                          icon={() => <CustomIcon name="star" />}
-                         onPress={() => Linking.openURL('https://play.google.com/store/apps/details?id=com.watch.ipo_watch&hl=en_IN')} />
+                         onPress={() => openInAppBrowser('https://play.google.com/store/apps/details?id=com.watch.ipo_watch&hl=en_IN')} />
             <ThemedView style={styles.socialIconContainer}>
-                <TouchableRipple onPress={() => Linking.openURL('https://www.facebook.com/ipowatchinfo')}>
+                <TouchableRipple onPress={() => openInAppBrowser('https://www.facebook.com/ipowatchinfo')}>
                     <Avatar.Image size={40} style={styles.iconImg} source={require('../assets/icons/facebook.png')} />
                 </TouchableRipple>
-                <TouchableRipple onPress={() => Linking.openURL('https://www.instagram.com/ipowatch.in/')}>
+                <TouchableRipple onPress={() => openInAppBrowser('https://www.instagram.com/ipowatch.in/')}>
                     <Avatar.Image size={40} style={styles.iconImg} source={require('../assets/icons/instagram.png')} />
                 </TouchableRipple>
-                <TouchableRipple onPress={() => Linking.openURL('https://www.youtube.com/@IPOWatch')}>
+                <TouchableRipple onPress={() => openInAppBrowser('https://www.youtube.com/@IPOWatch')}>
                     <Avatar.Image size={40} style={styles.iconImg} source={require('../assets/icons/youtube.png')} />
                 </TouchableRipple>
-                <TouchableRipple onPress={() => Linking.openURL('https://x.com/ipowatch_info')}>
+                <TouchableRipple onPress={() => openInAppBrowser('https://x.com/ipowatch_info')}>
                     <Avatar.Image size={40} style={styles.iconImg} source={require('../assets/icons/x.png')} />
                 </TouchableRipple>
             </ThemedView>
