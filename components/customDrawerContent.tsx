@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, Linking, StyleSheet, View} from 'react-native';
 import {Avatar, Drawer, TouchableRipple} from 'react-native-paper';
 import {useRouter} from 'expo-router';
 import {ThemedView} from "@/components/ThemedView";
@@ -15,15 +15,12 @@ export default function CustomDrawerContent() {
     const shareWithFriends = async () => {
         const imageAsset = Asset.fromModule(require('../assets/images/logo.png'));
         await imageAsset.downloadAsync();
-        const messageText = 'Check out this amazing app! IPO Watch is an all-in-one IPO app to help investors to get updates on Mainline IPO, SME IPO, Buyback, Right issues, NCD, IPO allotment, Reviews, and subscription. Download now: https://play.google.com/store/apps/details?id=com.watch.ipo_watch&hl=en_IN';
-
-        const options = {
-            mimeType: 'image/jpeg',
-            dialogTitle: messageText,
-        };
         try {
-            // Share the local file URI
-            await Sharing.shareAsync(imageAsset.localUri || imageAsset.uri, options);
+            await Sharing.shareAsync(imageAsset.localUri || imageAsset.uri, {
+                dialogTitle: 'IPO Watch is an all-in-one IPO app to help investors to get updates on Mainline IPO, SME IPO, Buyback, Right issues, NCD, IPO allotment, Reviews, and subscription. \n https://play.google.com/store/apps/details?id=com.watch.ipo_watch&hl=en_IN',
+                UTI: imageAsset.localUri || imageAsset.uri,
+                mimeType: 'image/jpeg',
+            });
         } catch (error) {
             console.error('Error sharing:', error);
         }
@@ -59,10 +56,17 @@ export default function CustomDrawerContent() {
             <Drawer.Item label="Terms & Condition"
                          icon={() => <CustomIcon name="book-sharp" />}
                          onPress={() => openInAppBrowser('https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/')} />
-            <Drawer.Item label="Contact Us"
+            <Drawer.Item label="Contact&nbsp;Us"
                          icon={() => <CustomIcon name="document-text" />}
-                         style={{width: '90%'}}
-                         onPress={() => openInAppBrowser('https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/')} />
+                         onPress={() => {
+                             const email = 'ipowatchinfo@gmail.com';
+                             const body = 'IPOWatch Support \n\n Dear IPOWatch user, \n Explain your issue here';
+                             const mailtoUrl = `mailto:${email}?&body=${encodeURIComponent(body)}`;
+
+                             Linking.openURL(mailtoUrl).catch((err) => {
+                                 console.error('Error opening email client:', err);
+                             });
+                         }}/>
             <Drawer.Item label="Rate the App"
                          icon={() => <CustomIcon name="star" />}
                          onPress={() => openInAppBrowser('https://play.google.com/store/apps/details?id=com.watch.ipo_watch&hl=en_IN')} />
