@@ -1,13 +1,12 @@
 import React from 'react';
-import {Image, Linking, StyleSheet, View} from 'react-native';
+import {Image, Share, StyleSheet} from 'react-native';
 import {Avatar, Drawer, TouchableRipple} from 'react-native-paper';
 import {useRouter} from 'expo-router';
 import {ThemedView} from "@/components/ThemedView";
-import * as Sharing from 'expo-sharing';
-import {Asset} from "expo-asset";
 import {ThemedText} from "@/components/ThemedText";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import * as WebBrowser from 'expo-web-browser';
+import * as Linking from 'expo-linking';
 
 export default function CustomDrawerContent() {
     const router = useRouter();
@@ -20,24 +19,16 @@ export default function CustomDrawerContent() {
     }
 
     const shareWithFriends = async () => {
-        const imageAsset = Asset.fromModule(require('../assets/images/logo.png'));
-        await imageAsset.downloadAsync();
-
-        if (!(await Sharing.isAvailableAsync())) {
-            alert(`Uh oh, sharing isn't available on your platform`);
-            return;
-        }
-
         try {
-            await Sharing.shareAsync(imageAsset.localUri || imageAsset.uri, {
-                dialogTitle: 'IPO Watch is an all-in-one IPO app to help investors to get updates on Mainline IPO, SME IPO, Buyback, Right issues, NCD, IPO allotment, Reviews, and subscription. \n https://play.google.com/store/apps/details?id=com.watch.ipo_watch&hl=en_IN',
-                UTI: imageAsset.localUri || imageAsset.uri,
-                mimeType: 'image/jpeg',
-            });
-        } catch (error) {
-            console.error('Error sharing:', error);
+            const options = {
+                message : "IPO Watch is an all-in-one IPO app to help investors get updates on Mainline IPO, SME IPO, Buyback, Right issues, NCD, IPO allotment, Reviews, and subscription. \nhttps://play.google.com/store/apps/details?id=com.watch.ipo_watch&hl=en_IN"
+            };
+            await Share.share(options);
+        } catch (e) {
+            console.log(e);
         }
     };
+
 
     const openInAppBrowser = async (url: string) => {
         try {
@@ -48,9 +39,9 @@ export default function CustomDrawerContent() {
     };
 
     const CustomIcon = ({name}: { name: React.ComponentProps<typeof Ionicons>['name'] }) => (
-        <View style={styles.roundIconContainer}>
+        <ThemedView style={styles.roundIconContainer}>
             <Ionicons name={name} size={24} color="#000"/>
-        </View>
+        </ThemedView>
     );
 
     const ContactUs = async () => {
@@ -131,12 +122,13 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 3,
         // Shadow for Android
-        elevation: 15,
+        elevation: 5,
     },
     socialIconContainer: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
+        maxHeight:40,
         marginVertical: 30
     },
     iconImg: {
@@ -146,6 +138,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        paddingBottom: 10
+        // paddingBottom: 10
     }
 });
