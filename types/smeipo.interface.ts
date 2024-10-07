@@ -3,6 +3,7 @@ export interface SmeIpoData {
     title: string;
     offer_date: string;
     price: string;
+    lot_size: string;
     gmp: string;
     gain: string;
     label: string;

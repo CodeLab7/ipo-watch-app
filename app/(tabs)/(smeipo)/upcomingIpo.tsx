@@ -4,13 +4,17 @@ import {ThemedView} from "@/components/ThemedView";
 import {ScrollView} from "react-native-gesture-handler";
 import {Button, Card, Divider} from "react-native-paper";
 import {ThemedText} from "@/components/ThemedText";
-import {Image, StyleSheet} from "react-native";
+import {Image, Share, StyleSheet} from "react-native";
 import {Colors} from "@/constants/Colors";
 import {SME_IPO_UPCOMING_API} from "@/api/sme";
 import {SmeIpoData} from "@/types/smeipo.interface";
+import {BANNER_API} from "@/api/banner";
+import BannerImage from "@/components/BannerImage";
+import {baseImageURL} from "@/helper/other/url-helper";
 
 export const UpcomingIpo: React.FC = () => {
     const [upcomingData, setUpcomingData] = useState<SmeIpoData[]>([]);
+    const [bannerData, setBannerData] = useState<SmeIpoData[]>([]);
     const fetchUpcomingData = async () => {
         try {
             const response = await SME_IPO_UPCOMING_API();
@@ -20,12 +24,35 @@ export const UpcomingIpo: React.FC = () => {
         }
     };
 
+    const fetchBannerData = async () => {
+        try {
+            const response = await BANNER_API();
+            setBannerData(response.data);
+        } catch (error) {
+            console.error("Error fetching data", error);
+        }
+    };
+
     useEffect(() => {
         fetchUpcomingData();
+        fetchBannerData();
     }, []);
+
+    const handleShare = async (item: SmeIpoData) => {
+        try {
+            const options = {
+                message: `IPO Detail\n\nCompany Name: ${item.title}\nIPO Offer Date: ${item.open_date} to ${item.close_date}\nOffer Price:${item.offer_price}\nlotsize:${item.lot_size} \nIPO GMP:${item.gmp}\n\nHey I'm using IPO Watch App to get details of IPOs.\n\nDownload Now for FREE.\n\nAndroid:\nhttps://play.google.com/store/apps/details?id=com.watch.ipo_watch`
+            };
+            await Share.share(options);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
     return (
         <ThemedView style={styles.mainContainer}>
             <ScrollView showsVerticalScrollIndicator={false}>
+                <BannerImage bannerData={bannerData} />
                 {upcomingData?.map((item, index) => (
                     <Card key={index} style={styles.card}>
                         <ThemedView style={styles.mainBoardContainer}>
@@ -33,7 +60,7 @@ export const UpcomingIpo: React.FC = () => {
                         </ThemedView>
                         <ThemedView style={styles.header}>
                             <ThemedView style={styles.imgContainer}>
-                                <Image source={{uri: 'https://admin.ipowatch.in/storage/app/public/mainlineipo_images/0MFzk4X9gdr2VSkKtLARn0I2iPM73LGFRj30o7y8.jpg'}} style={styles.img} />
+                                <Image source={{uri: `${baseImageURL}/smeipo_images/${item.image}`}} style={styles.img} />
                             </ThemedView>
                             <ThemedView style={styles.headerText}>
                                 <ThemedText type={'title'}>{item.title}</ThemedText>
@@ -48,7 +75,7 @@ export const UpcomingIpo: React.FC = () => {
                             <Divider style={styles.verticalDivider} />
                             <ThemedView style={styles.item}>
                                 <ThemedText>LOT SIZE</ThemedText>
-                                <ThemedText type={'subtitle'}>{item.gmp}</ThemedText>
+                                <ThemedText type={'subtitle'}>{item.lot_size}</ThemedText>
                             </ThemedView>
                             <Divider style={styles.verticalDivider} />
                             <ThemedView style={styles.item}>
@@ -61,7 +88,7 @@ export const UpcomingIpo: React.FC = () => {
                                 <ThemedText type={'subtitle'}>Exp. Premium / GMP : {item.gmp}</ThemedText>
                             </ThemedView>
                             <ThemedView style={styles.shareButtonContainer}>
-                                <Button icon="share-variant" mode="contained" style={styles.shareButton} textColor={Colors.btnTextColor}>Share</Button>
+                                <Button onPress={() => handleShare(item)} icon="share-variant" mode="contained" style={styles.shareButton} textColor={Colors.btnTextColor}>Share</Button>
                             </ThemedView>
                         </ThemedView>
                     </Card>
