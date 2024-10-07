@@ -2,7 +2,7 @@ import {Tabs} from 'expo-router';
 import React from 'react';
 import {Colors} from '@/constants/Colors';
 import {useColorScheme} from '@/hooks/useColorScheme';
-import {MaterialIcons} from '@expo/vector-icons';
+import {FontAwesome, MaterialCommunityIcons, MaterialIcons} from '@expo/vector-icons';
 import {IconButton} from 'react-native-paper';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
 
@@ -27,7 +27,7 @@ export default function TabLayout() {
                              title: 'Mainline',
                              headerTitle: 'Mainline IPO',
                              headerLeft: () => (<IconButton icon="menu" onPress={() => navigation.dispatch(DrawerActions.openDrawer())} />),
-                             tabBarIcon: ({color, focused}) => (<MaterialIcons name="timeline" color={color} size={30} />),
+                             tabBarIcon: ({color, focused}) => (<FontAwesome name="bar-chart" color={color} size={30} />),
                          }} />
             <Tabs.Screen name="explore"
                          options={{
