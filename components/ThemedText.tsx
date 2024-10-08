@@ -34,9 +34,10 @@ export function ThemedText({
 
 const styles = StyleSheet.create({
     default: {
-        fontSize: 14,
-        lineHeight: 24,
-        color: '#999999',
+        fontSize: 11,
+        lineHeight: 18,
+        color: '#797979',
+        letterSpacing: 1,
         fontFamily: 'Poppins-Light',
     },
     defaultSemiBold: {
@@ -52,8 +53,7 @@ const styles = StyleSheet.create({
         letterSpacing: 0.5
     },
     subtitle: {
-        fontSize: 14,
-        lineHeight: 24,
+        fontSize: 12,
         color: '#000',
         fontFamily: 'Poppins-Light',
     },

@@ -1,4 +1,4 @@
-export const baseURL = process.env.EXPO_PUBLIC_API_URL;
+import {baseURL} from "@/helper/other/url-helper";
 
 const fetchData = async (url: string, method: 'GET') => {
     const response = await fetch(`${baseURL}${url}`, {

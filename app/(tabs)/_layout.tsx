@@ -13,6 +13,7 @@ export default function TabLayout() {
     return (
         <Tabs screenOptions={{
             tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+            tabBarInactiveTintColor: '#000000',
             headerShown: true,
         }}>
             <Tabs.Screen name="index"
@@ -27,14 +28,14 @@ export default function TabLayout() {
                              title: 'Mainline',
                              headerTitle: 'Mainline IPO',
                              headerLeft: () => (<IconButton icon="menu" onPress={() => navigation.dispatch(DrawerActions.openDrawer())} />),
-                             tabBarIcon: ({color, focused}) => (<FontAwesome name="bar-chart" color={color} size={30} />),
+                             tabBarIcon: ({color}) => (<FontAwesome name="bar-chart" color={color} size={30} />),
                          }} />
-            <Tabs.Screen name="explore"
+            <Tabs.Screen name="smeIpo"
                          options={{
-                             title: 'News',
-                             headerTitle: 'News/Offers',
+                             title: 'SME IPO',
+                             headerTitle: 'SME IPO',
                              headerLeft: () => (<IconButton icon="menu" onPress={() => navigation.dispatch(DrawerActions.openDrawer())} />),
-                             tabBarIcon: ({color, focused}) => (<MaterialIcons name="newspaper" color={color} size={30} />),
+                             tabBarIcon: ({color}) => (<MaterialCommunityIcons name="lightning-bolt-circle" size={30} color={color} />),
                          }} />
         </Tabs>
     );
