@@ -27,9 +27,7 @@ export default function RootLayout() {
     return (
         <PaperProvider>
             <Drawer drawerContent={CustomDrawerContent}>
-                <Drawer.Screen
-                    name="(tabs)"
-                    options={{title: 'LATEST IPO GMP'}} />
+                <Drawer.Screen name="(tabs)" options={{headerShown: false}} />
             </Drawer>
         </PaperProvider>
     )
