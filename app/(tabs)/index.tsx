@@ -2,24 +2,14 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {Image, Share, StyleSheet} from 'react-native';
 import {ScrollView} from "react-native-gesture-handler";
-import {Button, Card, Divider} from 'react-native-paper';
+import {Card, Divider} from 'react-native-paper';
 import {ThemedView} from "@/components/ThemedView";
 import {ThemedText} from "@/components/ThemedText";
 import {GMP_API} from "@/api/gmp";
 import {Colors} from "@/constants/Colors";
 import {BANNER_API} from "@/api/banner";
 import BannerImage from "@/components/BannerImage";
-
-interface IPOData {
-    image: string;
-    title: string;
-    offer_date: string;
-    price: string;
-    gmp: string;
-    gain: string;
-    label: string;
-    url: string;
-}
+import ThemedButton from "@/components/ThemedButton";
 
 const HomeScreen: React.FC = () => {
     const [gmpData, setGmpData] = useState<IPOData[]>([]);
@@ -95,7 +85,7 @@ const HomeScreen: React.FC = () => {
                             </ThemedView>
                         </ThemedView>
                         <ThemedView style={styles.shareButtonContainer}>
-                            <Button onPress={() => handleShare(item)} icon="share-variant" mode="contained" style={styles.shareButton} textColor={Colors.btnTextColor}>Share</Button>
+                            <ThemedButton onPress={() => handleShare(item)} title="Share" icon="share-variant" />
                         </ThemedView>
                     </Card>
                 ))}
@@ -132,7 +122,7 @@ const styles = StyleSheet.create({
     img: {
         width: 110,
         height: 65,
-        resizeMode: 'contain'
+        resizeMode: 'cover'
     },
     mainBoardContainer: {
         flex: 1,
@@ -164,8 +154,5 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-    },
-    shareButton: {
-        backgroundColor: 'none',
     },
 });
