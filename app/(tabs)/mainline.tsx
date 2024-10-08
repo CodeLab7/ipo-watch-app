@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     },
     labelStyle: {
         color: 'black',
-        fontWeight: '900',
+        fontWeight: '600',
         fontSize: 16,
         paddingBottom: 5,
     },
