@@ -12,7 +12,10 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
     const [loaded] = useFonts({
-        SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+        'Poppins-Light': require('../assets/fonts/Poppins-Light.ttf'),
+        'Poppins-Medium': require('../assets/fonts/Poppins-Medium.ttf'),
+        'Poppins-Bold': require('../assets/fonts/Poppins-Bold.ttf'),
+        'Poppins-SemiBold': require('../assets/fonts/Poppins-SemiBold.ttf'),
     });
 
     useEffect(() => {
@@ -27,9 +30,7 @@ export default function RootLayout() {
     return (
         <PaperProvider>
             <Drawer drawerContent={CustomDrawerContent}>
-                <Drawer.Screen
-                    name="(tabs)"
-                    options={{title: 'LATEST IPO GMP'}} />
+                <Drawer.Screen name="(tabs)" options={{headerShown: false}} />
             </Drawer>
         </PaperProvider>
     )

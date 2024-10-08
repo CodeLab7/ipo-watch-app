@@ -1,33 +1,30 @@
-import {ScrollView} from "react-native-gesture-handler";
-import {Dimensions, Image} from "react-native";
 import * as React from "react";
-import {useState} from "react";
-import {baseImageURL} from "@/helper/other/url-helper";
+import {Dimensions, Image} from "react-native";
+import Swiper from 'react-native-swiper';
+import {TouchableRipple} from 'react-native-paper';
+import * as WebBrowser from "expo-web-browser";
 
 const BannerImage = ({bannerData}) => {
-    const [active, setActive] = useState(0);
+    const baseImageURL = process.env.EXPO_PUBLIC_IMAGE_URL;
     const {width} = Dimensions.get('window');
     const height = width * 0.3;
 
-    const onScrollChange = ({nativeEvent}) => {
-        const slide = Math.ceil(
-            nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.width,
-        );
-        if (slide !== active) {
-            setActive(slide);
+    const openInAppBrowser = async (url: string) => {
+        try {
+            await WebBrowser.openBrowserAsync(url);
+        } catch (error) {
+            console.error('Error opening browser:', error);
         }
     };
+
     return (
-        <ScrollView
-            pagingEnabled
-            horizontal
-            onScroll={onScrollChange}
-            showsHorizontalScrollIndicator={false}
-            style={{width, height}}>
+        <Swiper showsPagination={false} loop={true} autoplay={true} autoplayTimeout={1} height={height}>
             {bannerData.map((item, index) => (
-                <Image key={index} source={{uri: `${baseImageURL}/banner_image/${item.image}`}} style={{width, height, resizeMode: 'cover', marginVertical: 10}} />
+                <TouchableRipple key={index} onPress={() => openInAppBrowser('https://upstox.com/open-demat-account/?f=KR8824')}>
+                    <Image source={{uri: `${baseImageURL}/banner_image/${item.image}`}} style={{width: width, resizeMode: 'contain', height: height}} />
+                </TouchableRipple>
             ))}
-        </ScrollView>
+        </Swiper>
     )
 }
-export default BannerImage
+export default BannerImage;
