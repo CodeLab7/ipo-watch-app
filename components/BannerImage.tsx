@@ -25,7 +25,7 @@ const BannerImage = ({bannerData}) => {
             showsHorizontalScrollIndicator={false}
             style={{width, height}}>
             {bannerData.map((item, index) => (
-                <Image key={index} source={{uri: `${baseImageURL}/banner_image/${item.image}`}} style={{width, height, resizeMode: 'cover', marginVertical: 10}} />
+                <Image key={index} source={{uri: `${baseImageURL}/banner_image/${item.image}`}} style={{width, height, resizeMode: 'cover'}} />
             ))}
         </ScrollView>
     )
