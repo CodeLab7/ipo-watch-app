@@ -29,7 +29,7 @@ export const SME_IPO_LISTED_API = async (): Promise<APIResponse> => {
 
 export const SINGLE_SME_IPO_API = async(id): Promise<APIResponse> => {
     console.log("id=========>",`/sme_ipo/${id}`);
-    return await API.get(`/sme_ipo/${id}`).then(response => {
+    return await API.get(`/sme_ipo/${296}`).then(response => {
         console.log("434343434343",response)
         if(response) {
             console.log("respons+++++++++++++++++++e",response)
