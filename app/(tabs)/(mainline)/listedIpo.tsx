@@ -53,7 +53,7 @@ export const ListedIpo: React.FC = () => {
         <ThemedView style={styles.mainContainer}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <BannerImage bannerData={bannerData} />
-                {listedData.map((item, index) => (
+                {listedData?.map((item, index) => (
                     <Card key={index} style={styles.card}>
                         <ThemedView style={styles.mainBoardContainer}>
                             <ThemedText style={styles.mainBoard}>{item.label}</ThemedText>
