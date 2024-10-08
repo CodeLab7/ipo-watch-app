@@ -50,9 +50,9 @@ const styles = StyleSheet.create({
     },
     labelStyle: {
         color: 'black',
-        fontWeight: '600',
+        fontWeight: '900',
         fontSize: 16,
-        paddingBottom: 5,
+        paddingBottom: 3,
     },
 });
 
