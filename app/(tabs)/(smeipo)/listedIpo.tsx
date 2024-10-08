@@ -2,7 +2,7 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import {ThemedView} from "@/components/ThemedView";
 import {ScrollView} from "react-native-gesture-handler";
-import {Button, Card, Divider} from "react-native-paper";
+import {Card, Divider} from "react-native-paper";
 import {ThemedText} from "@/components/ThemedText";
 import {Image, Share, StyleSheet} from "react-native";
 import {Colors} from "@/constants/Colors";
@@ -11,6 +11,7 @@ import {SME_IPO_LISTED_API} from "@/api/sme";
 import {BANNER_API} from "@/api/banner";
 import BannerImage from "@/components/BannerImage";
 import {baseImageURL} from "@/helper/other/url-helper";
+import ThemedButton from "@/components/ThemedButton";
 
 export const ListedIpo: React.FC = () => {
     const [listedData, setListedData] = useState<SmeIpoData[]>([]);
@@ -89,7 +90,7 @@ export const ListedIpo: React.FC = () => {
                                 <ThemedText type={'subtitle'}>Exp. Premium / GMP : {item.gmp}</ThemedText>
                             </ThemedView>
                             <ThemedView style={styles.shareButtonContainer}>
-                                <Button onPress={() => handleShare(item)} icon="share-variant" mode="contained" style={styles.shareButton} textColor={Colors.btnTextColor}>Share</Button>
+                                <ThemedButton onPress={() => handleShare(item)} title="Share" icon="share-variant" />
                             </ThemedView>
                         </ThemedView>
                     </Card>
@@ -159,8 +160,5 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-    },
-    shareButton: {
-        backgroundColor: 'none',
     },
 });

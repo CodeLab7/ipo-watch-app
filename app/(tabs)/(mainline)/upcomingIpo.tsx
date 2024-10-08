@@ -3,13 +3,14 @@ import {useEffect, useState} from "react";
 import {MAINLINE_ALL_API} from "@/api/mainline";
 import {ThemedView} from "@/components/ThemedView";
 import {ScrollView} from "react-native-gesture-handler";
-import {Button, Card, Divider} from "react-native-paper";
+import { Card, Divider} from "react-native-paper";
 import {ThemedText} from "@/components/ThemedText";
 import {Image, Share, StyleSheet} from "react-native";
 import {Colors} from "@/constants/Colors";
 import {MainlineData} from "@/types/mainline.interface";
 import {BANNER_API} from "@/api/banner";
 import BannerImage from "@/components/BannerImage";
+import ThemedButton from "@/components/ThemedButton";
 
 export const UpcomingIpo: React.FC = () => {
     const [upcomingData, setUpcomingData] = useState<MainlineData[]>([]);
@@ -88,7 +89,7 @@ export const UpcomingIpo: React.FC = () => {
                                 <ThemedText type={'subtitle'}>Exp. Premium / GMP : {item.gmp}</ThemedText>
                             </ThemedView>
                             <ThemedView style={styles.shareButtonContainer}>
-                                <Button onPress={() => handleShare(item)} icon="share-variant" mode="contained" style={styles.shareButton} textColor={Colors.btnTextColor}>Share</Button>
+                                <ThemedButton onPress={() => handleShare(item)} title="Share" icon="share-variant" />
                             </ThemedView>
                         </ThemedView>
                     </Card>
@@ -159,8 +160,5 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-    },
-    shareButton: {
-        backgroundColor: 'none',
     },
 });
