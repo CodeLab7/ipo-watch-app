@@ -34,6 +34,7 @@ export default function RootLayout() {
           <Drawer>
             <Drawer.Screen name="(tabs)" options={{headerShown: false}} />
             <Stack.Screen name="+not-found" />
+            <Stack.Screen name="singleOffer"/>
           </Drawer>
         </ThemeProvider>
       </PaperProvider>

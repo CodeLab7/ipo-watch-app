@@ -1,4 +1,5 @@
 export interface SmeIpoData {
+    id: string;
     image: string;
     title: string;
     offer_date: string;
