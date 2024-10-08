@@ -124,9 +124,9 @@ const styles = StyleSheet.create({
         borderWidth: 1
     },
     img: {
-        width: 110,
-        height: 65,
-        resizeMode: 'contain'
+        width: 90,
+        height: 60,
+        resizeMode: 'cover'
     },
     mainBoardContainer: {
         flex: 1,
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingTop: 3,
+        paddingTop: 5,
     },
     item: {
         flex: 1,

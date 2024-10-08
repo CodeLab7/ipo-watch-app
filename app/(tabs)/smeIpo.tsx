@@ -28,7 +28,7 @@ const SmoIpoScreen = () => {
                     indicatorStyle={styles.indicatorStyle}
                     style={styles.tabBarStyle}
                     renderLabel={({route}) => (
-                        <ThemedText style={styles.labelStyle}> {route.title} </ThemedText>
+                        <ThemedText style={styles.labelStyle} type={'subtitle'}> {route.title} </ThemedText>
                     )}
                 />
             )}
@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
     },
     labelStyle: {
         color: 'black',
-        fontWeight: '900',
         fontSize: 16,
         paddingBottom: 3,
     },

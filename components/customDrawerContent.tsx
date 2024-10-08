@@ -94,7 +94,7 @@ export default function CustomDrawerContent() {
                 </TouchableRipple>
             </ThemedView>
             <ThemedView style={styles.versionText}>
-                <ThemedText>App version : 1.0.11</ThemedText>
+                <ThemedText type={'subtitle'}>App Version : 1.0.11</ThemedText>
             </ThemedView>
         </ThemedView>
     )
@@ -138,6 +138,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        // paddingBottom: 10
+        paddingBottom: 10
     }
 });
