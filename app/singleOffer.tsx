@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Card, Divider} from 'react-native-paper';
+import {Card, Divider} from 'react-native-paper';
 import {useLocalSearchParams} from 'expo-router';
 import {SINGLE_SME_IPO_API} from '@/api/sme';
 import {SmeIpoData} from '@/types/smeipo.interface';
@@ -14,25 +14,15 @@ const SingleOffer = () => {
     const params = useLocalSearchParams();
     const {id} = params;
     const [ipoData, setIpoData] = useState<SmeIpoData>({id});
-    console.log("ipoData", ipoData)
 
     const fetchIpoData = async () => {
         const response = await SINGLE_SME_IPO_API(id);
-        console.log("response", response)
         setIpoData(response.data);
     };
 
     useEffect(() => {
         fetchIpoData();
     }, []);
-
-    // Reusable Row Component for IPO Details
-    const DetailRow = ({label, value}: { label: string, value: string | number }) => (
-        <ThemedView style={styles.detailRow}>
-            <ThemedText style={styles.detailLabel}>{label}</ThemedText>
-            <ThemedText style={styles.detailValue}>{value}</ThemedText>
-        </ThemedView>
-    );
 
     return (
         <ScrollView>
@@ -75,18 +65,30 @@ const SingleOffer = () => {
                             <ThemedText style={styles.sectionTitle} type={'title'}>IPO Details</ThemedText>
                         </ThemedView>
                         <Divider style={styles.divider} />
-                        <DetailRow label="Open Date" value={ipoData.open_date} />
-                        <DetailRow label="Close Date" value={ipoData.close_date} />
-                        <DetailRow label="IPO Size" value={ipoData.ipo_size} />
-                        <DetailRow label="Face Value" value={ipoData.face_value} />
-                        <DetailRow label="Retail Quota" value={ipoData.retail_quota} />
-                        <DetailRow label="Lot Size" value={ipoData.lot_size} />
-                        <DetailRow label="Amount" value={ipoData.amount} />
-                        <DetailRow label="Allotment Date" value={ipoData.allotment_date} />
-                        <DetailRow label="Listing Date" value={ipoData.listing_date} />
-                        <DetailRow label="Listing Group" value={ipoData.listing_group} />
-                        <DetailRow label="Lead Manager" value={ipoData.lead_manager} />
-                        <DetailRow label="Registrar" value={ipoData.register} />
+                        {[
+                            {label: "Open Date", value: `${ipoData.open_date}`},
+                            {label: "Close Date", value: `${ipoData.close_date}`},
+                            {label: "IPO Size", value: `${ipoData.ipo_size}`},
+                            {label: "Face Value", value: `${ipoData.face_value}`},
+                            {label: "Retail Quota", value: `${ipoData.retail_quota}`},
+                            {label: "Lot Size", value: `${ipoData.lot_size}`},
+                            {label: "Amount", value: `${ipoData.amount}`},
+                            {label: "Allotment Date", value: `${ipoData.allotment_date}`},
+                            {label: "Listing Date", value: `${ipoData.listing_date}`},
+                            {label: "Listing Group", value: `${ipoData.listing_group}`},
+                        ].map((item, index) => (
+                            <ThemedView
+                                key={index}
+                                style={{
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    paddingVertical: 10,
+                                    backgroundColor: index % 2 === 1 ? '#e6f9f0' : 'white',
+                                }}>
+                                <ThemedText type={'subtitle'} style={{paddingHorizontal: 10}}>{item.label} :</ThemedText>
+                                <ThemedText type={'subtitle'} style={{paddingHorizontal: 10}}>{item.value}</ThemedText>
+                            </ThemedView>
+                        ))}
                     </ThemedView>
                 </Card>
             </ThemedView>
@@ -96,23 +98,6 @@ const SingleOffer = () => {
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 16,
-    },
-    detailsRow: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginBottom: 16,
-    },
-    detailLabel: {
-        fontSize: 12,
-        color: 'gray',
-    },
-    detailValue: {
-        fontSize: 14,
-        fontWeight: 'bold',
-    },
     sectionTitle: {
         fontSize: 16,
         marginVertical: 16,
@@ -121,15 +106,12 @@ const styles = StyleSheet.create({
     detailsTable: {
         backgroundColor: '#f0f0f0',
         borderRadius: 8,
-        // padding: 8,
     },
     detailRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingVertical: 4,
     },
-
-
     mainContainer: {
         flex: 1,
         backgroundColor: Colors.bodyBackgroundColor
