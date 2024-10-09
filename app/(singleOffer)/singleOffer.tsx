@@ -102,7 +102,7 @@ const SingleOffer = () => {
                 <ThemedView style={styles.mainContainer}>
                     <Card style={styles.card}>
                         <ThemedView>
-                            <ThemedText style={styles.sectionTitle} type={'title'}>Valutions</ThemedText>
+                            <ThemedText style={styles.sectionTitle} type={'title'}>Valuations</ThemedText>
                             <Divider style={styles.divider} />
                         </ThemedView>
                         {[
