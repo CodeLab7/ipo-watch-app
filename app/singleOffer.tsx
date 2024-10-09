@@ -1,28 +1,25 @@
 import React, {useEffect, useState} from 'react';
 import {Card, Divider} from 'react-native-paper';
 import {useLocalSearchParams} from 'expo-router';
-import {SINGLE_SME_IPO_API} from '@/api/sme';
 import {SmeIpoData} from '@/types/smeipo.interface';
 import {ScrollView} from "react-native-gesture-handler";
 import {ThemedView} from "@/components/ThemedView";
 import {ThemedText} from "@/components/ThemedText";
 import {Image, StyleSheet} from "react-native";
 import {Colors} from "@/constants/Colors";
-import {baseImageURL} from "@/helper/other/url-helper";
 
 const SingleOffer = () => {
     const params = useLocalSearchParams();
-    const {id} = params;
-    const [ipoData, setIpoData] = useState<SmeIpoData>({id});
-
-    const fetchIpoData = async () => {
-        const response = await SINGLE_SME_IPO_API(id);
-        setIpoData(response.data);
-    };
+    const [ipoData, setIpoData] = useState<SmeIpoData>(null);
 
     useEffect(() => {
-        fetchIpoData();
-    }, []);
+        if (params.item) {
+            const parsedItem = JSON.parse(params.item as string);
+            setIpoData(parsedItem);
+        }
+    }, [params.item]);
+
+    if (!ipoData) return null;
 
     return (
         <ScrollView>
@@ -33,7 +30,7 @@ const SingleOffer = () => {
                     </ThemedView>
                     <ThemedView style={styles.header}>
                         <ThemedView style={styles.imgContainer}>
-                            <Image source={{uri: `${baseImageURL}/smeipo_images/${ipoData.image}`}} style={styles.img} />
+                            <Image source={{uri: ipoData.image}} style={styles.img} />
                         </ThemedView>
                         <ThemedView style={styles.headerText}>
                             <ThemedText type={'title'} style={styles.companyName}>{ipoData.title}</ThemedText>
@@ -60,36 +57,35 @@ const SingleOffer = () => {
             </ThemedView>
             <ThemedView style={styles.mainContainer}>
                 <Card style={styles.card}>
-                    <ThemedView style={styles.detailsTable}>
-                        <ThemedView>
-                            <ThemedText style={styles.sectionTitle} type={'title'}>IPO Details</ThemedText>
-                        </ThemedView>
-                        <Divider style={styles.divider} />
-                        {[
-                            {label: "Open Date", value: `${ipoData.open_date}`},
-                            {label: "Close Date", value: `${ipoData.close_date}`},
-                            {label: "IPO Size", value: `${ipoData.ipo_size}`},
-                            {label: "Face Value", value: `${ipoData.face_value}`},
-                            {label: "Retail Quota", value: `${ipoData.retail_quota}`},
-                            {label: "Lot Size", value: `${ipoData.lot_size}`},
-                            {label: "Amount", value: `${ipoData.amount}`},
-                            {label: "Allotment Date", value: `${ipoData.allotment_date}`},
-                            {label: "Listing Date", value: `${ipoData.listing_date}`},
-                            {label: "Listing Group", value: `${ipoData.listing_group}`},
-                        ].map((item, index) => (
-                            <ThemedView
-                                key={index}
-                                style={{
-                                    flexDirection: 'row',
-                                    justifyContent: 'space-between',
-                                    paddingVertical: 10,
-                                    backgroundColor: index % 2 === 1 ? '#e6f9f0' : 'white',
-                                }}>
-                                <ThemedText type={'subtitle'} style={{paddingHorizontal: 10}}>{item.label} :</ThemedText>
-                                <ThemedText type={'subtitle'} style={{paddingHorizontal: 10}}>{item.value}</ThemedText>
-                            </ThemedView>
-                        ))}
+                    <ThemedView>
+                        <ThemedText style={styles.sectionTitle} type={'title'}>IPO Details</ThemedText>
                     </ThemedView>
+                    <Divider style={styles.divider} />
+                    {[
+                        {label: "Open Date", value: `${ipoData.open_date}`},
+                        {label: "Close Date", value: `${ipoData.close_date}`},
+                        {label: "IPO Size", value: `${ipoData.ipo_size}`},
+                        {label: "IPO Size", value: `${ipoData.ipo_size}`},
+                        {label: "Face Value", value: `${ipoData.face_value}`},
+                        {label: "Retail Quota", value: `${ipoData.retail_quota}`},
+                        {label: "Lot Size", value: `${ipoData.lot_size}`},
+                        {label: "Amount", value: `${ipoData.amount}`},
+                        {label: "Allotment Date", value: `${ipoData.allotment_date}`},
+                        {label: "Listing Date", value: `${ipoData.listing_date}`},
+                        {label: "Listing Group", value: `${ipoData.listing_group}`},
+                    ].map((item, index) => (
+                        <ThemedView
+                            key={index}
+                            style={{
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                paddingVertical: 10,
+                                backgroundColor: index % 2 === 1 ? '#e6f9f0' : 'white',
+                            }}>
+                            <ThemedText type={'subtitle'} style={{paddingHorizontal: 10}}>{item.label} :</ThemedText>
+                            <ThemedText type={'subtitle'} style={{paddingHorizontal: 10}}>{item.value}</ThemedText>
+                        </ThemedView>
+                    ))}
                 </Card>
             </ThemedView>
         </ScrollView>
@@ -102,10 +98,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginVertical: 16,
         textAlign: 'center',
-    },
-    detailsTable: {
-        backgroundColor: '#f0f0f0',
-        borderRadius: 8,
     },
     detailRow: {
         flexDirection: 'row',

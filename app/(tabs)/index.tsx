@@ -42,7 +42,7 @@ const HomeScreen: React.FC = () => {
     const handleShare = async (item: IPOData) => {
         try {
             const options = {
-                message: `IPO Detail\n\nCompany Name: ${item.title}\nIPO Offer Date: ${item.offer_date}\nOffer Price:${item.price}\nIPO GMP:${item.gmp}\n\nHey I'm using IPO Watch App to get details of IPOs.\n\nDownload Now for FREE.\n\nAndroid:\nttps://play.google.com/store/apps/details?id=com.watch.ipo_watch`
+                message: `IPO Detail\n\nCompany Name: ${item.title}\nIPO Offer Date: ${item.offer_date}\nOffer Price:${item.price}\nIPO GMP:${item.gmp}\n\nHey I'm using IPO Watch App to get details of IPOs.\n\nDownload Now for FREE.\n\nAndroid:\nhttps://play.google.com/store/apps/details?id=com.watch.ipo_watch`
             };
             await Share.share(options);
         } catch (e) {
@@ -61,7 +61,7 @@ const HomeScreen: React.FC = () => {
                         </ThemedView>
                         <ThemedView style={styles.header}>
                             <ThemedView style={styles.imgContainer}>
-                                <Image source={{uri: `${baseImageURL}/greymarket_premium_images/${item.image}`}} style={styles.img} />
+                                <Image source={{uri: item.image}} style={styles.img} />
                             </ThemedView>
                             <ThemedView style={styles.headerText}>
                                 <ThemedText type={'title'}>{item.title}</ThemedText>
