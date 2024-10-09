@@ -2,7 +2,7 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import {ThemedView} from "@/components/ThemedView";
 import {ScrollView} from "react-native-gesture-handler";
-import {Button, Card, Divider, TouchableRipple} from "react-native-paper";
+import {Card, Divider, TouchableRipple} from "react-native-paper";
 import {ThemedText} from "@/components/ThemedText";
 import {Image, Share, StyleSheet} from "react-native";
 import {Colors} from "@/constants/Colors";
@@ -11,8 +11,8 @@ import {SME_IPO_LISTED_API} from "@/api/sme";
 import {BANNER_API} from "@/api/banner";
 import BannerImage from "@/components/BannerImage";
 import {baseImageURL} from "@/helper/other/url-helper";
-import { useRouter } from 'expo-router';
-
+import {useRouter} from 'expo-router';
+import ThemedButton from "@/components/ThemedButton";
 
 export const ListedIpo: React.FC = () => {
     const [listedData, setListedData] = useState<SmeIpoData[]>([]);
@@ -45,7 +45,7 @@ export const ListedIpo: React.FC = () => {
     const handleShare = async (item: SmeIpoData) => {
         try {
             const options = {
-                message: `IPO Detail\n\nCompany Name: ${item.title}\nIPO Offer Date: ${item.open_date} to ${item.close_date}\nOffer Price:${item.offer_price}\nlotsize:${item.lot_size} \nIPO GMP:${item.gmp}\n\nHey I'm using IPO Watch App to get details of IPOs.\n\nDownload Now for FREE.\n\nAndroid:\nhttps://play.google.com/store/apps/details?id=com.watch.ipo_watch`
+                message: `IPO Detail\n\nCompany Name: ${item.title}\nIPO Offer Date: ${item.open_date} to ${item.close_date}\nOffer Price: ${item.offer_price}\nLotsize: ${item.lot_size} \nIPO GMP: ${item.gmp}\n\nHey I'm using IPO Watch App to get details of IPOs.\n\nDownload Now for FREE.\n\nAndroid:\nhttps://play.google.com/store/apps/details?id=com.watch.ipo_watch`
             };
             await Share.share(options);
         } catch (e) {
@@ -55,7 +55,7 @@ export const ListedIpo: React.FC = () => {
 
     const handleSingleOffer = (id: number) => {
         router.push(`/singleOffer?id=${id}`);
-        console.log("id",id)
+        console.log("id", id)
     };
     return (
         <ThemedView style={styles.mainContainer}>
@@ -98,7 +98,7 @@ export const ListedIpo: React.FC = () => {
                                         <ThemedText type={'subtitle'}>Exp. Premium / GMP : {item.gmp}</ThemedText>
                                     </ThemedView>
                                     <ThemedView style={styles.shareButtonContainer}>
-                                        <Button onPress={() => handleShare(item)} icon="share-variant" mode="contained" style={styles.shareButton} textColor={Colors.btnTextColor}>Share</Button>
+                                        <ThemedButton onPress={() => handleShare(item)} title="Share" icon="share-variant" />
                                     </ThemedView>
                                 </ThemedView>
                             </>
@@ -136,9 +136,9 @@ const styles = StyleSheet.create({
         borderWidth: 1
     },
     img: {
-        width: 110,
-        height: 65,
-        resizeMode: 'contain'
+        width: 90,
+        height: 60,
+        resizeMode: 'cover'
     },
     mainBoardContainer: {
         flex: 1,
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingTop: 3,
+        paddingTop: 5,
     },
     item: {
         flex: 1,
@@ -170,8 +170,5 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-    },
-    shareButton: {
-        backgroundColor: 'none',
     },
 });

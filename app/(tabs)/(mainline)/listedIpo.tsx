@@ -1,25 +1,26 @@
-import * as React from 'react';
-import {useEffect, useState} from 'react';
-import {Image, Share, StyleSheet} from 'react-native';
-import {ScrollView} from "react-native-gesture-handler";
-import {Card, Divider} from 'react-native-paper';
+import * as React from "react";
+import {useEffect, useState} from "react";
+import {MAINLINE_LISTED_API} from "@/api/mainline";
 import {ThemedView} from "@/components/ThemedView";
+import {ScrollView} from "react-native-gesture-handler";
+import {Card, Divider} from "react-native-paper";
 import {ThemedText} from "@/components/ThemedText";
-import {GMP_API} from "@/api/gmp";
+import {Image, Share, StyleSheet} from "react-native";
 import {Colors} from "@/constants/Colors";
-import {BANNER_API} from "@/api/banner";
+import {MainlineData} from "@/types/mainline.interface";
 import BannerImage from "@/components/BannerImage";
+import {BANNER_API} from "@/api/banner";
 import ThemedButton from "@/components/ThemedButton";
 
-const HomeScreen: React.FC = () => {
-    const [gmpData, setGmpData] = useState<IPOData[]>([]);
-    const [bannerData, setBannerData] = useState<IPOData[]>([]);
+export const ListedIpo: React.FC = () => {
+    const [listedData, setListedData] = useState<MainlineData[]>([]);
+    const [bannerData, setBannerData] = useState<MainlineData[]>([]);
     const baseImageURL = process.env.EXPO_PUBLIC_IMAGE_URL;
 
-    const fetchGmpData = async () => {
+    const fetchListedData = async () => {
         try {
-            const response = await GMP_API();
-            setGmpData(response.data);
+            const response = await MAINLINE_LISTED_API();
+            setListedData(response.data);
         } catch (error) {
             console.error("Error fetching data", error);
         }
@@ -35,65 +36,69 @@ const HomeScreen: React.FC = () => {
     };
 
     useEffect(() => {
-        fetchGmpData();
+        fetchListedData();
         fetchBannerData();
     }, []);
 
-    const handleShare = async (item: IPOData) => {
+    const handleShare = async (item: MainlineData) => {
         try {
             const options = {
-                message: `IPO Detail\n\nCompany Name: ${item.title}\nIPO Offer Date: ${item.offer_date}\nOffer Price:${item.price}\nIPO GMP:${item.gmp}\n\nHey I'm using IPO Watch App to get details of IPOs.\n\nDownload Now for FREE.\n\nAndroid:\nttps://play.google.com/store/apps/details?id=com.watch.ipo_watch`
+                message: `IPO Detail\n\nCompany Name: ${item.title}\nIPO Offer Date: ${item.open_date} to ${item.close_date}\nOffer Price: ${item.offer_price}\nLotsize: ${item.lot_size} \nIPO GMP: ${item.gmp}\n\nHey I'm using IPO Watch App to get details of IPOs.\n\nDownload Now for FREE.\n\nAndroid:\nhttps://play.google.com/store/apps/details?id=com.watch.ipo_watch`
             };
             await Share.share(options);
         } catch (e) {
             console.log(e);
         }
     };
-
     return (
         <ThemedView style={styles.mainContainer}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <BannerImage bannerData={bannerData} />
-                {gmpData?.map((item, index) => (
+                {listedData?.map((item, index) => (
                     <Card key={index} style={styles.card}>
                         <ThemedView style={styles.mainBoardContainer}>
                             <ThemedText style={styles.mainBoard}>{item.label}</ThemedText>
                         </ThemedView>
                         <ThemedView style={styles.header}>
                             <ThemedView style={styles.imgContainer}>
-                                <Image source={{uri: `${baseImageURL}/greymarket_premium_images/${item.image}`}} style={styles.img} />
+                                <Image source={{uri: `${baseImageURL}/mainlineipo_images/${item.image}`}} style={styles.img} />
                             </ThemedView>
                             <ThemedView style={styles.headerText}>
                                 <ThemedText type={'title'}>{item.title}</ThemedText>
-                                <ThemedText type={'subtitle'}>Offer Date : {item.offer_date}</ThemedText>
+                                <ThemedText type={'subtitle'}>Offer Date : {item.open_date} to {item.close_date}</ThemedText>
                             </ThemedView>
                         </ThemedView>
                         <ThemedView style={styles.itemContainer}>
                             <ThemedView style={styles.item}>
                                 <ThemedText>IPO PRICE</ThemedText>
-                                <ThemedText type={'subtitle'}>{item.price}</ThemedText>
+                                <ThemedText type={'subtitle'}>{item.offer_price}</ThemedText>
                             </ThemedView>
                             <Divider style={styles.verticalDivider} />
                             <ThemedView style={styles.item}>
-                                <ThemedText>IOP GMP</ThemedText>
-                                <ThemedText type={'subtitle'}>{item.gmp}</ThemedText>
+                                <ThemedText>LOT SIZE</ThemedText>
+                                <ThemedText type={'subtitle'}>{item.lot_size}</ThemedText>
                             </ThemedView>
                             <Divider style={styles.verticalDivider} />
                             <ThemedView style={styles.item}>
-                                <ThemedText>Listing Gain</ThemedText>
-                                <ThemedText type={'subtitle'}>{item.gain}</ThemedText>
+                                <ThemedText>SUBSCRIBE</ThemedText>
+                                <ThemedText type={'subtitle'}>{item.subscription}</ThemedText>
                             </ThemedView>
                         </ThemedView>
-                        <ThemedView style={styles.shareButtonContainer}>
-                            <ThemedButton onPress={() => handleShare(item)} title="Share" icon="share-variant" />
+                        <ThemedView style={styles.itemContainer}>
+                            <ThemedView style={styles.headerText}>
+                                <ThemedText type={'subtitle'}>Exp. Premium / GMP : {item.gmp}</ThemedText>
+                            </ThemedView>
+                            <ThemedView style={styles.shareButtonContainer}>
+                                <ThemedButton onPress={() => handleShare(item)} title="Share" icon="share-variant" />
+                            </ThemedView>
                         </ThemedView>
                     </Card>
                 ))}
             </ScrollView>
         </ThemedView>
-    );
+    )
 }
-export default HomeScreen
+
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
@@ -120,8 +125,8 @@ const styles = StyleSheet.create({
         borderWidth: 1
     },
     img: {
-        width: 110,
-        height: 65,
+        width: 90,
+        height: 60,
         resizeMode: 'cover'
     },
     mainBoardContainer: {
@@ -139,7 +144,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingTop: 3,
+        paddingTop: 5,
     },
     item: {
         flex: 1,

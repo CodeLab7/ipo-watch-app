@@ -1,11 +1,12 @@
-import {ListedIpo} from "@/app/(tabs)/(smeipo)/listedIpo";
-import {useState} from "react";
-import {UpcomingIpo} from "@/app/(tabs)/(smeipo)/upcomingIpo";
+import * as React from 'react';
+import {useState} from 'react';
 import {SceneMap, TabBar, TabView} from "react-native-tab-view";
 import {StyleSheet} from 'react-native';
+import {UpcomingIpo} from "@/app/(tabs)/(mainline)/upcomingIpo";
+import {ListedIpo} from "@/app/(tabs)/(mainline)/listedIpo";
 import {ThemedText} from "@/components/ThemedText";
 
-const SmoIpoScreen = () => {
+const MainlineScreen: React.FC = () => {
     const [index, setIndex] = useState(0);
 
     const [routes] = useState([
@@ -17,6 +18,7 @@ const SmoIpoScreen = () => {
         upcoming: UpcomingIpo,
         listed: ListedIpo,
     });
+
     return (
         <TabView
             navigationState={{index, routes}}
@@ -53,4 +55,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default SmoIpoScreen
+export default MainlineScreen;
