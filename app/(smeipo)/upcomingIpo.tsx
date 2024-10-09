@@ -11,11 +11,12 @@ import {SmeIpoData} from "@/types/smeipo.interface";
 import {BANNER_API} from "@/api/banner";
 import BannerImage from "@/components/BannerImage";
 import ThemedButton from "@/components/ThemedButton";
-import {router} from "expo-router";
+import {useRouter} from "expo-router";
 
 export const UpcomingIpo: React.FC = () => {
     const [upcomingData, setUpcomingData] = useState<SmeIpoData[]>([]);
     const [bannerData, setBannerData] = useState<SmeIpoData[]>([]);
+    const router = useRouter();
     const fetchUpcomingData = async () => {
         try {
             const response = await SME_IPO_UPCOMING_API();

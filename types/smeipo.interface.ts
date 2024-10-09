@@ -21,4 +21,13 @@ export interface SmeIpoData {
     listing_group: string;
     lead_manager: string;
     register: string;
+    eps_per_ipo: string;
+    company_about: string;
+    company_promoter: string;
+    issue_objective: string;
+    disclaimer: string;
+    company_financial: Array<any>;
+    drhp: string;
+    rhp: string;
+    apply_now:string;
 }

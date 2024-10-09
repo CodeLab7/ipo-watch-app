@@ -11,12 +11,12 @@ import {MainlineData} from "@/types/mainline.interface";
 import BannerImage from "@/components/BannerImage";
 import {BANNER_API} from "@/api/banner";
 import ThemedButton from "@/components/ThemedButton";
-import {router} from "expo-router";
+import {useRouter} from "expo-router";
 
 export const ListedIpo: React.FC = () => {
     const [listedData, setListedData] = useState<MainlineData[]>([]);
     const [bannerData, setBannerData] = useState<MainlineData[]>([]);
-
+    const router = useRouter();
     const fetchListedData = async () => {
         try {
             const response = await MAINLINE_LISTED_API();
@@ -52,7 +52,8 @@ export const ListedIpo: React.FC = () => {
     };
 
     const handleSingleOffer = (item) => {
-        router.push(`/singleOffer?item=${JSON.stringify(item)}`);
+        const serializedItem = encodeURIComponent(JSON.stringify(item));
+        router.push(`/singleOffer?item=${serializedItem}`);
     };
 
     return (
