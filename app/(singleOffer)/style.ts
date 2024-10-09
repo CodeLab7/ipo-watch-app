@@ -96,7 +96,7 @@ export const styles = StyleSheet.create({
     },
     renderHtmlFont: {
         fontFamily: 'Poppins-Medium',
-        fontSize: 14,
+        fontSize: 13,
         color: '#444',
         lineHeight: 22
     },
