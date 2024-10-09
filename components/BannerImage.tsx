@@ -21,7 +21,7 @@ const BannerImage = ({bannerData}) => {
         <Swiper showsPagination={false} loop={true} autoplay={true} autoplayTimeout={1} height={height}>
             {bannerData.map((item, index) => (
                 <TouchableRipple key={index} onPress={() => openInAppBrowser('https://upstox.com/open-demat-account/?f=KR8824')}>
-                    <Image source={{uri: `${baseImageURL}/banner_image/${item.image}`}} style={{width: width, resizeMode: 'contain', height: height}} />
+                    <Image source={{uri: item.image}} style={{width: width, resizeMode: 'contain', height: height}} />
                 </TouchableRipple>
             ))}
         </Swiper>

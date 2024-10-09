@@ -1,4 +1,5 @@
 export interface SmeIpoData {
+    id: string;
     image: string;
     title: string;
     offer_date: string;
@@ -11,4 +12,22 @@ export interface SmeIpoData {
     close_date: string;
     offer_price: string;
     subscription: string;
+    ipo_size: string;
+    face_value: string;
+    retail_quota: string;
+    amount: string;
+    allotment_date: string;
+    listing_date: string;
+    listing_group: string;
+    lead_manager: string;
+    register: string;
+    eps_per_ipo: string;
+    company_about: string;
+    company_promoter: string;
+    issue_objective: string;
+    disclaimer: string;
+    company_financial: Array<any>;
+    drhp: string;
+    rhp: string;
+    apply_now:string;
 }

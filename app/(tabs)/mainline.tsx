@@ -2,8 +2,8 @@ import * as React from 'react';
 import {useState} from 'react';
 import {SceneMap, TabBar, TabView} from "react-native-tab-view";
 import {StyleSheet} from 'react-native';
-import {UpcomingIpo} from "@/app/(tabs)/(mainline)/upcomingIpo";
-import {ListedIpo} from "@/app/(tabs)/(mainline)/listedIpo";
+import {UpcomingIpo} from "@/app/(mainline)/upcomingIpo";
+import {ListedIpo} from "@/app/(mainline)/listedIpo";
 import {ThemedText} from "@/components/ThemedText";
 
 const MainlineScreen: React.FC = () => {

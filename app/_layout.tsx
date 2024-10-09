@@ -5,6 +5,8 @@ import CustomDrawerContent from '../components/customDrawerContent';
 import * as SplashScreen from 'expo-splash-screen';
 import {useEffect} from 'react';
 import 'react-native-reanimated';
+import {Stack} from 'expo-router';
+import {LogBox} from "react-native";
 
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -17,7 +19,7 @@ export default function RootLayout() {
         'Poppins-Bold': require('../assets/fonts/Poppins-Bold.ttf'),
         'Poppins-SemiBold': require('../assets/fonts/Poppins-SemiBold.ttf'),
     });
-
+    LogBox.ignoreAllLogs();
     useEffect(() => {
         if (loaded) {
             SplashScreen.hideAsync()
@@ -31,6 +33,8 @@ export default function RootLayout() {
         <PaperProvider>
             <Drawer drawerContent={CustomDrawerContent}>
                 <Drawer.Screen name="(tabs)" options={{headerShown: false}} />
+                <Stack.Screen name="(singleOffer)/singleOffer" options={{headerShown: false}} />
+                <Stack.Screen name="+not-found" />
             </Drawer>
         </PaperProvider>
     )

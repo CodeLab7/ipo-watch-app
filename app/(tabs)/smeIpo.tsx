@@ -1,6 +1,6 @@
-import {ListedIpo} from "@/app/(tabs)/(smeipo)/listedIpo";
+import {ListedIpo} from "@/app/(smeipo)/listedIpo";
 import {useState} from "react";
-import {UpcomingIpo} from "@/app/(tabs)/(smeipo)/upcomingIpo";
+import {UpcomingIpo} from "@/app/(smeipo)/upcomingIpo";
 import {SceneMap, TabBar, TabView} from "react-native-tab-view";
 import {StyleSheet} from 'react-native';
 import {ThemedText} from "@/components/ThemedText";
