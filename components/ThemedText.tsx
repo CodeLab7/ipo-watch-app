@@ -49,11 +49,11 @@ const styles = StyleSheet.create({
     defaultLight: {
         fontSize: 12,
         color: '#000',
-        fontFamily: 'Poppins-Light',
+        fontFamily: 'Poppins-Regular',
     },
     title: {
-        fontSize: 18,
-        lineHeight: 30,
+        fontSize: 16,
+        lineHeight: 25,
         color: '#0ba213',
         fontFamily: 'Poppins-Bold',
         letterSpacing: 0.5
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     subtitle: {
         fontSize: 12,
         color: '#000',
-        fontFamily: 'Poppins-Light',
+        fontFamily: 'Poppins-Regular',
     },
     link: {
         lineHeight: 30,

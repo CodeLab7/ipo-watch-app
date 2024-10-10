@@ -4,14 +4,14 @@ import {Colors} from "@/constants/Colors";
 export const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: Colors.bodyBackgroundColor
+        backgroundColor: Colors.bodyBackgroundColor,
     },
     card: {
         marginHorizontal: 10,
         marginVertical: 5,
         borderRadius: 8,
-        elevation: 1,
         padding: 1.5,
+        backgroundColor: Colors.bodyBackgroundColor,
     },
     header: {
         flexDirection: 'row',
@@ -62,4 +62,9 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
+    loaderContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
 });

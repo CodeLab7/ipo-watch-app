@@ -23,7 +23,7 @@ export const Colors = {
     tabIconDefault: '#687076',
     tabIconSelected: tintColorLight,
   },
-  bodyBackgroundColor: '#f5f2f3',
+  bodyBackgroundColor: '#fff',
   mainBoardColor: '#c20606',
   mainBoardTextColor: '#fff',
   dividerBgColor: '#ddd',

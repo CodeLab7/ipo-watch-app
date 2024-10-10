@@ -98,7 +98,7 @@ const SingleOffer = () => {
                             <Button mode="contained" onPress={() => openInAppBrowser(ipoData.drhp)} buttonColor={'#fff'} textColor={'#0ba213'} labelStyle={styles.btnDetailsLabel}><FontAwesome name="file" size={18}
                                                                                                                                                                                                 color="#0ba213" /> DHRP</Button>
                             <Button mode="contained" onPress={() => openInAppBrowser(ipoData.rhp)} buttonColor={'#fff'} textColor={'#0ba213'} labelStyle={styles.btnDetailsLabel}><FontAwesome name="file" size={18}
-                                                                                                                                                                                                      color="#0ba213" /> RHP</Button>
+                                                                                                                                                                                               color="#0ba213" /> RHP</Button>
                         </ThemedView>
                     </Card>
                 </ThemedView>
@@ -153,7 +153,7 @@ const SingleOffer = () => {
                             <Divider style={styles.divider} />
                         </ThemedView>
                         <ThemedView style={styles.subContainer}>
-                            <RenderHTML baseStyle={styles.renderHtmlFont} contentWidth={width} source={{html: ipoData.company_about}} />
+                            <RenderHTML baseStyle={styles.renderHtmlFont} contentWidth={width} source={{html: ipoData.company_about}} defaultTextProps={{style: {fontFamily: 'Poppins-Regular'}}} />
                         </ThemedView>
                     </Card>
                 </ThemedView>
@@ -165,7 +165,7 @@ const SingleOffer = () => {
                         </ThemedView>
                         <ThemedView style={styles.subContainer}>
                             <ThemedText type={'defaultSemiBold'} style={{fontFamily: 'Poppins-SemiBold', fontSize: 14}}>Company Promoter(s)</ThemedText>
-                            <RenderHTML baseStyle={styles.renderHtmlFont} contentWidth={width} source={{html: ipoData.company_promoter}} />
+                            <RenderHTML baseStyle={styles.renderHtmlFont} contentWidth={width} source={{html: ipoData.company_promoter}} defaultTextProps={{style: {fontFamily: 'Poppins-Regular'}}} />
                         </ThemedView>
                     </Card>
                 </ThemedView>
@@ -176,7 +176,7 @@ const SingleOffer = () => {
                             <Divider style={styles.divider} />
                         </ThemedView>
                         <ThemedView>
-                            <RenderHTML baseStyle={styles.renderHtmlFont} contentWidth={width} source={{html: ipoData.issue_objective}} />
+                            <RenderHTML baseStyle={styles.renderHtmlFont} contentWidth={width} source={{html: ipoData.issue_objective}} defaultTextProps={{style: {fontFamily: 'Poppins-Regular'}}} />
                         </ThemedView>
                     </Card>
                 </ThemedView>
@@ -187,7 +187,7 @@ const SingleOffer = () => {
                             <Divider style={styles.divider} />
                         </ThemedView>
                         <ThemedView style={styles.subContainer}>
-                            <RenderHTML baseStyle={styles.renderHtmlFont} contentWidth={width} source={{html: ipoData.disclaimer}} />
+                            <RenderHTML baseStyle={styles.renderHtmlFont} contentWidth={width} source={{html: ipoData.disclaimer}} defaultTextProps={{style: {fontFamily: 'Poppins-Regular'}}} />
                         </ThemedView>
                     </Card>
                 </ThemedView>

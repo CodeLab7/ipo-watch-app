@@ -12,10 +12,12 @@ import BannerImage from "@/components/BannerImage";
 import ThemedButton from "@/components/ThemedButton";
 import {useRouter} from "expo-router";
 import {styles} from "@/assets/css/commonCss";
+import Loader from "@/components/Loader";
 
 export const UpcomingIpo: React.FC = () => {
     const [upcomingData, setUpcomingData] = useState<SmeIpoData[]>([]);
     const [bannerData, setBannerData] = useState<SmeIpoData[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
     const router = useRouter();
     const fetchUpcomingData = async () => {
         try {
@@ -23,6 +25,8 @@ export const UpcomingIpo: React.FC = () => {
             setUpcomingData(response.data);
         } catch (error) {
             console.error("Error fetching data", error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -32,6 +36,8 @@ export const UpcomingIpo: React.FC = () => {
             setBannerData(response.data);
         } catch (error) {
             console.error("Error fetching data", error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -57,53 +63,59 @@ export const UpcomingIpo: React.FC = () => {
 
     return (
         <ThemedView style={styles.mainContainer}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <BannerImage bannerData={bannerData} />
-                {upcomingData?.map((item, index) => (
-                    <Card key={index} style={styles.card}>
-                        <TouchableRipple onPress={() => handleSingleOffer(item)}>
-                            <>
-                                <ThemedView style={styles.mainBoardContainer}>
-                                    <ThemedText style={styles.mainBoard}>{item.label}</ThemedText>
-                                </ThemedView>
-                                <ThemedView style={styles.header}>
-                                    <ThemedView style={styles.imgContainer}>
-                                        <Image source={{uri: item.image}} style={styles.img} />
+            {loading ? (
+                <ThemedView style={styles.loaderContainer}>
+                    <Loader />
+                </ThemedView>
+            ) : (
+                <ScrollView showsVerticalScrollIndicator={false}>
+                    <BannerImage bannerData={bannerData} />
+                    {upcomingData?.map((item, index) => (
+                        <Card key={index} style={styles.card}>
+                            <TouchableRipple onPress={() => handleSingleOffer(item)}>
+                                <>
+                                    <ThemedView style={styles.mainBoardContainer}>
+                                        <ThemedText style={styles.mainBoard}>{item.label}</ThemedText>
                                     </ThemedView>
-                                    <ThemedView style={styles.headerText}>
-                                        <ThemedText type={'title'}>{item.title}</ThemedText>
-                                        <ThemedText type={'subtitle'}>Offer Date : {item.open_date} to {item.close_date}</ThemedText>
+                                    <ThemedView style={styles.header}>
+                                        <ThemedView style={styles.imgContainer}>
+                                            <Image source={{uri: item.image}} style={styles.img} />
+                                        </ThemedView>
+                                        <ThemedView style={styles.headerText}>
+                                            <ThemedText type={'title'}>{item.title}</ThemedText>
+                                            <ThemedText type={'subtitle'}>Offer Date : {item.open_date} to {item.close_date}</ThemedText>
+                                        </ThemedView>
                                     </ThemedView>
-                                </ThemedView>
-                                <ThemedView style={styles.itemContainer}>
-                                    <ThemedView style={styles.item}>
-                                        <ThemedText>IPO PRICE</ThemedText>
-                                        <ThemedText type={'subtitle'}>{item.offer_price}</ThemedText>
+                                    <ThemedView style={styles.itemContainer}>
+                                        <ThemedView style={styles.item}>
+                                            <ThemedText>IPO PRICE</ThemedText>
+                                            <ThemedText type={'subtitle'}>{item.offer_price}</ThemedText>
+                                        </ThemedView>
+                                        <Divider style={styles.verticalDivider} />
+                                        <ThemedView style={styles.item}>
+                                            <ThemedText>LOT SIZE</ThemedText>
+                                            <ThemedText type={'subtitle'}>{item.lot_size}</ThemedText>
+                                        </ThemedView>
+                                        <Divider style={styles.verticalDivider} />
+                                        <ThemedView style={styles.item}>
+                                            <ThemedText>SUBSCRIBE</ThemedText>
+                                            <ThemedText type={'subtitle'}>{item.subscription}</ThemedText>
+                                        </ThemedView>
                                     </ThemedView>
-                                    <Divider style={styles.verticalDivider} />
-                                    <ThemedView style={styles.item}>
-                                        <ThemedText>LOT SIZE</ThemedText>
-                                        <ThemedText type={'subtitle'}>{item.lot_size}</ThemedText>
+                                    <ThemedView style={styles.itemContainer}>
+                                        <ThemedView style={styles.headerText}>
+                                            <ThemedText type={'subtitle'}>Exp. Premium / GMP : {item.gmp}</ThemedText>
+                                        </ThemedView>
+                                        <ThemedView style={styles.shareButtonContainer}>
+                                            <ThemedButton onPress={() => handleShare(item)} title="Share" iconName="share-alt-square" textColor={'#f64c00'} buttonColor={'#fff'} />
+                                        </ThemedView>
                                     </ThemedView>
-                                    <Divider style={styles.verticalDivider} />
-                                    <ThemedView style={styles.item}>
-                                        <ThemedText>SUBSCRIBE</ThemedText>
-                                        <ThemedText type={'subtitle'}>{item.subscription}</ThemedText>
-                                    </ThemedView>
-                                </ThemedView>
-                                <ThemedView style={styles.itemContainer}>
-                                    <ThemedView style={styles.headerText}>
-                                        <ThemedText type={'subtitle'}>Exp. Premium / GMP : {item.gmp}</ThemedText>
-                                    </ThemedView>
-                                    <ThemedView style={styles.shareButtonContainer}>
-                                        <ThemedButton onPress={() => handleShare(item)} title="Share" iconName="share-alt-square" textColor={'#f64c00'} buttonColor={'#fff'}/>
-                                    </ThemedView>
-                                </ThemedView>
-                            </>
-                        </TouchableRipple>
-                    </Card>
-                ))}
-            </ScrollView>
+                                </>
+                            </TouchableRipple>
+                        </Card>
+                    ))}
+                </ScrollView>
+            )}
         </ThemedView>
     )
 }

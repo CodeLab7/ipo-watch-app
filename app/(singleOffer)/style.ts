@@ -22,11 +22,12 @@ export const styles = StyleSheet.create({
         alignItems: 'center'
     },
     companyName: {
-        fontSize: 22,
+        fontSize: 20,
         marginBottom: 8,
+        textAlign:'center',
     },
     offerDate: {
-        fontSize: 15
+        fontSize: 14
     },
     imgContainer: {
         borderColor: 'green',
@@ -34,8 +35,8 @@ export const styles = StyleSheet.create({
         marginVertical: 10
     },
     img: {
-        width: 210,
-        height: 100,
+        width: 180,
+        height: 85,
         resizeMode: 'contain'
     },
     mainBoardContainer: {
@@ -95,8 +96,8 @@ export const styles = StyleSheet.create({
         paddingVertical: 10
     },
     renderHtmlFont: {
-        fontFamily: 'Poppins-Medium',
-        fontSize: 13,
+        fontFamily: 'Poppins-Regular',
+        fontSize: 12,
         color: '#444',
         lineHeight: 22
     },
@@ -112,8 +113,9 @@ export const styles = StyleSheet.create({
         color: '#000'
     },
     cellText: {
-        fontFamily: 'Poppins-Light',
-        color: '#000',fontSize: 13,
+        fontFamily: 'Poppins-Regular',
+        color: '#000',
+        fontSize: 11,
     },
     btnDetailsLabel: {
         fontSize: 14,
