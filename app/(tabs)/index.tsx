@@ -1,20 +1,19 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {Image, Share, StyleSheet} from 'react-native';
+import {Image, Share} from 'react-native';
 import {ScrollView} from "react-native-gesture-handler";
 import {Card, Divider} from 'react-native-paper';
 import {ThemedView} from "@/components/ThemedView";
 import {ThemedText} from "@/components/ThemedText";
 import {GMP_API} from "@/api/gmp";
-import {Colors} from "@/constants/Colors";
 import {BANNER_API} from "@/api/banner";
 import BannerImage from "@/components/BannerImage";
 import ThemedButton from "@/components/ThemedButton";
+import {styles} from "@/assets/css/commonCss";
 
 const HomeScreen: React.FC = () => {
     const [gmpData, setGmpData] = useState<IPOData[]>([]);
     const [bannerData, setBannerData] = useState<IPOData[]>([]);
-    const baseImageURL = process.env.EXPO_PUBLIC_IMAGE_URL;
 
     const fetchGmpData = async () => {
         try {
@@ -85,7 +84,7 @@ const HomeScreen: React.FC = () => {
                             </ThemedView>
                         </ThemedView>
                         <ThemedView style={styles.shareButtonContainer}>
-                            <ThemedButton onPress={() => handleShare(item)} title="Share" icon="share-variant" />
+                            <ThemedButton onPress={() => handleShare(item)} title="Share" iconName="share-alt-square" textColor={'#f64c00'} buttonColor={'#fff'}/>
                         </ThemedView>
                     </Card>
                 ))}
@@ -94,65 +93,3 @@ const HomeScreen: React.FC = () => {
     );
 }
 export default HomeScreen
-const styles = StyleSheet.create({
-    mainContainer: {
-        flex: 1,
-        backgroundColor: Colors.bodyBackgroundColor
-    },
-    card: {
-        marginHorizontal: 10,
-        marginVertical: 5,
-        borderRadius: 8,
-        elevation: 1,
-        padding: 1.5,
-    },
-    header: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingHorizontal: 10,
-    },
-    headerText: {
-        flex: 1,
-        marginLeft: 15
-    },
-    imgContainer: {
-        borderColor: 'green',
-        borderWidth: 1
-    },
-    img: {
-        width: 110,
-        height: 65,
-        resizeMode: 'cover'
-    },
-    mainBoardContainer: {
-        flex: 1,
-        alignItems: 'flex-end'
-    },
-    mainBoard: {
-        backgroundColor: Colors.mainBoardColor,
-        color: Colors.mainBoardTextColor,
-        fontSize: 12,
-        paddingHorizontal: 5,
-        borderRadius: 4,
-    },
-    itemContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingTop: 3,
-    },
-    item: {
-        flex: 1,
-        alignItems: 'center',
-    },
-    verticalDivider: {
-        height: '60%',
-        width: 1,
-        backgroundColor: Colors.dividerBgColor,
-    },
-    shareButtonContainer: {
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-});

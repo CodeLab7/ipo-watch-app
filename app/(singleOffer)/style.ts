@@ -101,9 +101,7 @@ export const styles = StyleSheet.create({
         lineHeight: 22
     },
     btnLabel: {
-        fontSize: 17,
         fontFamily: 'Poppins-Bold',
-        paddingTop: 4,
     },
     cellContainer: {
         marginVertical: -5,

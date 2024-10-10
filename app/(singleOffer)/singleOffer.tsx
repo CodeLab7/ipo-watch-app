@@ -11,6 +11,7 @@ import RenderHTML from "react-native-render-html";
 import Header from "@/components/Header";
 import {useNavigation} from "@react-navigation/native";
 import {styles} from "@/app/(singleOffer)/style";
+import ThemedButton from "@/components/ThemedButton";
 
 const SingleOffer = () => {
     const params = useLocalSearchParams();
@@ -94,8 +95,10 @@ const SingleOffer = () => {
                             </ThemedView>
                         ))}
                         <ThemedView style={{flexDirection: 'row', justifyContent: 'center'}}>
-                            <Button mode="contained" onPress={() =>  openInAppBrowser(ipoData.drhp)} buttonColor={'#fff'} textColor={'#0ba213'} labelStyle={styles.btnDetailsLabel}><FontAwesome name="file" size={18} color="#0ba213" /> DHRP</Button>
-                            <Button mode="contained" onPress={() =>  openInAppBrowser(ipoData.rhp)} buttonColor={'#fff'} textColor={'#0ba213'} labelStyle={styles.btnDetailsLabel}><FontAwesome name="file" size={18} color="#0ba213" /> RHP</Button>
+                            <Button mode="contained" onPress={() => openInAppBrowser(ipoData.drhp)} buttonColor={'#fff'} textColor={'#0ba213'} labelStyle={styles.btnDetailsLabel}><FontAwesome name="file" size={18}
+                                                                                                                                                                                                color="#0ba213" /> DHRP</Button>
+                            <Button mode="contained" onPress={() => openInAppBrowser(ipoData.rhp)} buttonColor={'#fff'} textColor={'#0ba213'} labelStyle={styles.btnDetailsLabel}><FontAwesome name="file" size={18}
+                                                                                                                                                                                                      color="#0ba213" /> RHP</Button>
                         </ThemedView>
                     </Card>
                 </ThemedView>
@@ -189,10 +192,22 @@ const SingleOffer = () => {
                     </Card>
                 </ThemedView>
                 <ThemedView style={styles.shareButtonContainer}>
-                    <Button mode="contained" onPress={() =>  openInAppBrowser(ipoData.apply_now)} buttonColor={'#f64c00'} labelStyle={styles.btnLabel}>Apply Now <FontAwesome name="hand-o-right" size={22} color="#fff" /></Button>
+                    <ThemedButton onPress={() => openInAppBrowser(ipoData.apply_now)}
+                                  title="Apply Now"
+                                  buttonColor="#f64c00"
+                                  textColor="#fff"
+                                  icon={<FontAwesome name="hand-o-right" size={22} color="#fff" />}
+                                  labelStyle={styles.btnLabel}
+                                  contentStyle={{flexDirection: 'row-reverse'}} />
                 </ThemedView>
                 <ThemedView style={styles.shareButtonContainer}>
-                    <Button mode="contained" onPress={() =>  openInAppBrowser(ipoData.apply_now)} buttonColor={'#000000'} labelStyle={styles.btnLabel}>Allotment check <FontAwesome name="hand-o-right" size={22} color="#fff" /></Button>
+                    <ThemedButton onPress={() => openInAppBrowser(ipoData.apply_now)}
+                                  title="Allotment Check"
+                                  buttonColor="#000000"
+                                  textColor="#fff"
+                                  icon={<FontAwesome name="hand-o-right" size={22} color="#fff" />}
+                                  labelStyle={styles.btnLabel}
+                                  contentStyle={{flexDirection: 'row-reverse'}} />
                 </ThemedView>
             </ScrollView>
         </>
