@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Card, Divider, Button, DataTable,} from 'react-native-paper';
-import {useLocalSearchParams, useRouter} from 'expo-router';
+import {useLocalSearchParams} from 'expo-router';
 import {SmeIpoData} from '@/types/smeipo.interface';
 import {ScrollView} from "react-native-gesture-handler";
 import {ThemedView} from "@/components/ThemedView";
@@ -11,13 +11,13 @@ import RenderHTML from "react-native-render-html";
 import Header from "@/components/Header";
 import {useNavigation} from "@react-navigation/native";
 import {styles} from "@/app/(singleOffer)/style";
+import ThemedButton from "@/components/ThemedButton";
 
 const SingleOffer = () => {
     const params = useLocalSearchParams();
     const [ipoData, setIpoData] = useState<SmeIpoData>(null);
     const {width} = useWindowDimensions();
     const navigation = useNavigation();
-    const router = useRouter();
     useEffect(() => {
         if (params.item) {
             const parsedItem = JSON.parse(params.item as string);
@@ -94,8 +94,10 @@ const SingleOffer = () => {
                             </ThemedView>
                         ))}
                         <ThemedView style={{flexDirection: 'row', justifyContent: 'center'}}>
-                            <Button mode="contained" onPress={() =>  openInAppBrowser(ipoData.drhp)} buttonColor={'#fff'} textColor={'#0ba213'} labelStyle={styles.btnDetailsLabel}><FontAwesome name="file" size={18} color="#0ba213" /> DHRP</Button>
-                            <Button mode="contained" onPress={() =>  openInAppBrowser(ipoData.rhp)} buttonColor={'#fff'} textColor={'#0ba213'} labelStyle={styles.btnDetailsLabel}><FontAwesome name="file" size={18} color="#0ba213" /> RHP</Button>
+                            <Button mode="contained" onPress={() => openInAppBrowser(ipoData.drhp)} buttonColor={'#fff'} textColor={'#0ba213'} labelStyle={styles.btnDetailsLabel}><FontAwesome name="file" size={18}
+                                                                                                                                                                                                color="#0ba213" /> DHRP</Button>
+                            <Button mode="contained" onPress={() => openInAppBrowser(ipoData.rhp)} buttonColor={'#fff'} textColor={'#0ba213'} labelStyle={styles.btnDetailsLabel}><FontAwesome name="file" size={18}
+                                                                                                                                                                                               color="#0ba213" /> RHP</Button>
                         </ThemedView>
                     </Card>
                 </ThemedView>
@@ -150,7 +152,7 @@ const SingleOffer = () => {
                             <Divider style={styles.divider} />
                         </ThemedView>
                         <ThemedView style={styles.subContainer}>
-                            <RenderHTML baseStyle={styles.renderHtmlFont} contentWidth={width} source={{html: ipoData.company_about}} />
+                            <RenderHTML baseStyle={styles.renderHtmlFont} contentWidth={width} source={{html: ipoData.company_about}} defaultTextProps={{style: {fontFamily: 'Poppins-Regular'}}} />
                         </ThemedView>
                     </Card>
                 </ThemedView>
@@ -162,7 +164,7 @@ const SingleOffer = () => {
                         </ThemedView>
                         <ThemedView style={styles.subContainer}>
                             <ThemedText type={'defaultSemiBold'} style={{fontFamily: 'Poppins-SemiBold', fontSize: 14}}>Company Promoter(s)</ThemedText>
-                            <RenderHTML baseStyle={styles.renderHtmlFont} contentWidth={width} source={{html: ipoData.company_promoter}} />
+                            <RenderHTML baseStyle={styles.renderHtmlFont} contentWidth={width} source={{html: ipoData.company_promoter}} defaultTextProps={{style: {fontFamily: 'Poppins-Regular'}}} />
                         </ThemedView>
                     </Card>
                 </ThemedView>
@@ -173,7 +175,7 @@ const SingleOffer = () => {
                             <Divider style={styles.divider} />
                         </ThemedView>
                         <ThemedView>
-                            <RenderHTML baseStyle={styles.renderHtmlFont} contentWidth={width} source={{html: ipoData.issue_objective}} />
+                            <RenderHTML baseStyle={styles.renderHtmlFont} contentWidth={width} source={{html: ipoData.issue_objective}} defaultTextProps={{style: {fontFamily: 'Poppins-Regular'}}} />
                         </ThemedView>
                     </Card>
                 </ThemedView>
@@ -184,16 +186,32 @@ const SingleOffer = () => {
                             <Divider style={styles.divider} />
                         </ThemedView>
                         <ThemedView style={styles.subContainer}>
-                            <RenderHTML baseStyle={styles.renderHtmlFont} contentWidth={width} source={{html: ipoData.disclaimer}} />
+                            <RenderHTML baseStyle={styles.renderHtmlFont} contentWidth={width} source={{html: ipoData.disclaimer}} defaultTextProps={{style: {fontFamily: 'Poppins-Regular'}}} />
                         </ThemedView>
                     </Card>
                 </ThemedView>
-                <ThemedView style={styles.shareButtonContainer}>
-                    <Button mode="contained" onPress={() =>  openInAppBrowser(ipoData.apply_now)} buttonColor={'#f64c00'} labelStyle={styles.btnLabel}>Apply Now <FontAwesome name="hand-o-right" size={22} color="#fff" /></Button>
-                </ThemedView>
-                <ThemedView style={styles.shareButtonContainer}>
-                    <Button mode="contained" onPress={() =>  openInAppBrowser(ipoData.apply_now)} buttonColor={'#000000'} labelStyle={styles.btnLabel}>Allotment check <FontAwesome name="hand-o-right" size={22} color="#fff" /></Button>
-                </ThemedView>
+                {!ipoData.apply_now && (
+                    <ThemedView style={styles.shareButtonContainer}>
+                        <ThemedButton onPress={() => openInAppBrowser(ipoData.apply_now)}
+                                      title="Apply Now"
+                                      buttonColor="#f64c00"
+                                      textColor="#fff"
+                                      icon={<FontAwesome name="hand-o-right" size={22} color="#fff" />}
+                                      labelStyle={styles.btnLabel}
+                                      contentStyle={{flexDirection: 'row-reverse'}} />
+                    </ThemedView>
+                )}
+                {!ipoData.allotment_link && (
+                    <ThemedView style={styles.shareButtonContainer}>
+                        <ThemedButton onPress={() => openInAppBrowser(ipoData.allotment_link)}
+                                      title="Allotment Check"
+                                      buttonColor="#000000"
+                                      textColor="#fff"
+                                      icon={<FontAwesome name="hand-o-right" size={22} color="#fff" />}
+                                      labelStyle={styles.btnLabel}
+                                      contentStyle={{flexDirection: 'row-reverse'}} />
+                    </ThemedView>
+                )}
             </ScrollView>
         </>
     );

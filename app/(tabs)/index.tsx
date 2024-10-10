@@ -1,20 +1,21 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {Image, Share, StyleSheet} from 'react-native';
+import {Image, Share} from 'react-native';
 import {ScrollView} from "react-native-gesture-handler";
 import {Card, Divider} from 'react-native-paper';
 import {ThemedView} from "@/components/ThemedView";
 import {ThemedText} from "@/components/ThemedText";
 import {GMP_API} from "@/api/gmp";
-import {Colors} from "@/constants/Colors";
 import {BANNER_API} from "@/api/banner";
 import BannerImage from "@/components/BannerImage";
 import ThemedButton from "@/components/ThemedButton";
+import {styles} from "@/assets/css/commonCss";
+import Loader from "@/components/Loader";
 
 const HomeScreen: React.FC = () => {
     const [gmpData, setGmpData] = useState<IPOData[]>([]);
     const [bannerData, setBannerData] = useState<IPOData[]>([]);
-    const baseImageURL = process.env.EXPO_PUBLIC_IMAGE_URL;
+    const [loading, setLoading] = useState<boolean>(true);
 
     const fetchGmpData = async () => {
         try {
@@ -22,6 +23,8 @@ const HomeScreen: React.FC = () => {
             setGmpData(response.data);
         } catch (error) {
             console.error("Error fetching data", error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -31,6 +34,8 @@ const HomeScreen: React.FC = () => {
             setBannerData(response.data);
         } catch (error) {
             console.error("Error fetching data", error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -52,107 +57,51 @@ const HomeScreen: React.FC = () => {
 
     return (
         <ThemedView style={styles.mainContainer}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <BannerImage bannerData={bannerData} />
-                {gmpData?.map((item, index) => (
-                    <Card key={index} style={styles.card}>
-                        <ThemedView style={styles.mainBoardContainer}>
-                            <ThemedText style={styles.mainBoard}>{item.label}</ThemedText>
-                        </ThemedView>
-                        <ThemedView style={styles.header}>
-                            <ThemedView style={styles.imgContainer}>
-                                <Image source={{uri: item.image}} style={styles.img} />
+            {loading ? (
+                <ThemedView style={styles.loaderContainer}>
+                    <Loader />
+                </ThemedView>
+            ) : (
+                <ScrollView showsVerticalScrollIndicator={false}>
+                    <BannerImage bannerData={bannerData} />
+                    {gmpData?.map((item, index) => (
+                        <Card key={index} style={styles.card}>
+                            <ThemedView style={styles.mainBoardContainer}>
+                                <ThemedText style={styles.mainBoard}>{item.label}</ThemedText>
                             </ThemedView>
-                            <ThemedView style={styles.headerText}>
-                                <ThemedText type={'title'}>{item.title}</ThemedText>
-                                <ThemedText type={'subtitle'}>Offer Date : {item.offer_date}</ThemedText>
+                            <ThemedView style={styles.header}>
+                                <ThemedView style={styles.imgContainer}>
+                                    <Image source={{uri: item.image}} style={styles.img} />
+                                </ThemedView>
+                                <ThemedView style={styles.headerText}>
+                                    <ThemedText type={'title'}>{item.title}</ThemedText>
+                                    <ThemedText type={'subtitle'}>Offer Date : {item.offer_date}</ThemedText>
+                                </ThemedView>
                             </ThemedView>
-                        </ThemedView>
-                        <ThemedView style={styles.itemContainer}>
-                            <ThemedView style={styles.item}>
-                                <ThemedText>IPO PRICE</ThemedText>
-                                <ThemedText type={'subtitle'}>{item.price}</ThemedText>
+                            <ThemedView style={styles.itemContainer}>
+                                <ThemedView style={styles.item}>
+                                    <ThemedText>IPO PRICE</ThemedText>
+                                    <ThemedText type={'subtitle'}>{item.price}</ThemedText>
+                                </ThemedView>
+                                <Divider style={styles.verticalDivider} />
+                                <ThemedView style={styles.item}>
+                                    <ThemedText>IOP GMP</ThemedText>
+                                    <ThemedText type={'subtitle'}>{item.gmp}</ThemedText>
+                                </ThemedView>
+                                <Divider style={styles.verticalDivider} />
+                                <ThemedView style={styles.item}>
+                                    <ThemedText>Listing Gain</ThemedText>
+                                    <ThemedText type={'subtitle'}>{item.gain}</ThemedText>
+                                </ThemedView>
                             </ThemedView>
-                            <Divider style={styles.verticalDivider} />
-                            <ThemedView style={styles.item}>
-                                <ThemedText>IOP GMP</ThemedText>
-                                <ThemedText type={'subtitle'}>{item.gmp}</ThemedText>
+                            <ThemedView style={styles.shareButtonContainer}>
+                                <ThemedButton onPress={() => handleShare(item)} title="Share" iconName="share-alt-square" textColor={'#f64c00'} buttonColor={'#fff'} />
                             </ThemedView>
-                            <Divider style={styles.verticalDivider} />
-                            <ThemedView style={styles.item}>
-                                <ThemedText>Listing Gain</ThemedText>
-                                <ThemedText type={'subtitle'}>{item.gain}</ThemedText>
-                            </ThemedView>
-                        </ThemedView>
-                        <ThemedView style={styles.shareButtonContainer}>
-                            <ThemedButton onPress={() => handleShare(item)} title="Share" icon="share-variant" />
-                        </ThemedView>
-                    </Card>
-                ))}
-            </ScrollView>
+                        </Card>
+                    ))}
+                </ScrollView>
+            )}
         </ThemedView>
     );
 }
 export default HomeScreen
-const styles = StyleSheet.create({
-    mainContainer: {
-        flex: 1,
-        backgroundColor: Colors.bodyBackgroundColor
-    },
-    card: {
-        marginHorizontal: 10,
-        marginVertical: 5,
-        borderRadius: 8,
-        elevation: 1,
-        padding: 1.5,
-    },
-    header: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingHorizontal: 10,
-    },
-    headerText: {
-        flex: 1,
-        marginLeft: 15
-    },
-    imgContainer: {
-        borderColor: 'green',
-        borderWidth: 1
-    },
-    img: {
-        width: 110,
-        height: 65,
-        resizeMode: 'cover'
-    },
-    mainBoardContainer: {
-        flex: 1,
-        alignItems: 'flex-end'
-    },
-    mainBoard: {
-        backgroundColor: Colors.mainBoardColor,
-        color: Colors.mainBoardTextColor,
-        fontSize: 12,
-        paddingHorizontal: 5,
-        borderRadius: 4,
-    },
-    itemContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingTop: 3,
-    },
-    item: {
-        flex: 1,
-        alignItems: 'center',
-    },
-    verticalDivider: {
-        height: '60%',
-        width: 1,
-        backgroundColor: Colors.dividerBgColor,
-    },
-    shareButtonContainer: {
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-});
