@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Card, Divider, Button, DataTable,} from 'react-native-paper';
-import {useLocalSearchParams, useRouter} from 'expo-router';
+import {useLocalSearchParams} from 'expo-router';
 import {SmeIpoData} from '@/types/smeipo.interface';
 import {ScrollView} from "react-native-gesture-handler";
 import {ThemedView} from "@/components/ThemedView";
@@ -18,7 +18,6 @@ const SingleOffer = () => {
     const [ipoData, setIpoData] = useState<SmeIpoData>(null);
     const {width} = useWindowDimensions();
     const navigation = useNavigation();
-    const router = useRouter();
     useEffect(() => {
         if (params.item) {
             const parsedItem = JSON.parse(params.item as string);

@@ -58,7 +58,8 @@ export const UpcomingIpo: React.FC = () => {
     };
 
     const handleSingleOffer = (item) => {
-        router.push(`/singleOffer?item=${JSON.stringify(item)}`);
+        const serializedItem = encodeURIComponent(JSON.stringify(item));
+        router.push(`/singleOffer?item=${serializedItem}`);
     };
 
     return (
