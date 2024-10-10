@@ -30,4 +30,5 @@ export interface SmeIpoData {
     drhp: string;
     rhp: string;
     apply_now:string;
+    allotment_link:string;
 }

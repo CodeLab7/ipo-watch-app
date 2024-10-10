@@ -191,24 +191,28 @@ const SingleOffer = () => {
                         </ThemedView>
                     </Card>
                 </ThemedView>
-                <ThemedView style={styles.shareButtonContainer}>
-                    <ThemedButton onPress={() => openInAppBrowser(ipoData.apply_now)}
-                                  title="Apply Now"
-                                  buttonColor="#f64c00"
-                                  textColor="#fff"
-                                  icon={<FontAwesome name="hand-o-right" size={22} color="#fff" />}
-                                  labelStyle={styles.btnLabel}
-                                  contentStyle={{flexDirection: 'row-reverse'}} />
-                </ThemedView>
-                <ThemedView style={styles.shareButtonContainer}>
-                    <ThemedButton onPress={() => openInAppBrowser(ipoData.apply_now)}
-                                  title="Allotment Check"
-                                  buttonColor="#000000"
-                                  textColor="#fff"
-                                  icon={<FontAwesome name="hand-o-right" size={22} color="#fff" />}
-                                  labelStyle={styles.btnLabel}
-                                  contentStyle={{flexDirection: 'row-reverse'}} />
-                </ThemedView>
+                {!ipoData.apply_now && (
+                    <ThemedView style={styles.shareButtonContainer}>
+                        <ThemedButton onPress={() => openInAppBrowser(ipoData.apply_now)}
+                                      title="Apply Now"
+                                      buttonColor="#f64c00"
+                                      textColor="#fff"
+                                      icon={<FontAwesome name="hand-o-right" size={22} color="#fff" />}
+                                      labelStyle={styles.btnLabel}
+                                      contentStyle={{flexDirection: 'row-reverse'}} />
+                    </ThemedView>
+                )}
+                {!ipoData.allotment_link && (
+                    <ThemedView style={styles.shareButtonContainer}>
+                        <ThemedButton onPress={() => openInAppBrowser(ipoData.allotment_link)}
+                                      title="Allotment Check"
+                                      buttonColor="#000000"
+                                      textColor="#fff"
+                                      icon={<FontAwesome name="hand-o-right" size={22} color="#fff" />}
+                                      labelStyle={styles.btnLabel}
+                                      contentStyle={{flexDirection: 'row-reverse'}} />
+                    </ThemedView>
+                )}
             </ScrollView>
         </>
     );

@@ -19,7 +19,7 @@ const Header: React.FC<HeaderProps> = ({title, onBackPress}) => {
                 <TouchableOpacity onPress={onBackPress} style={styles.iconContainer}>
                     <Ionicons name="arrow-back-sharp" size={30} color="black" />
                 </TouchableOpacity>
-                <ThemedText style={styles.title}>{title}</ThemedText>
+                <ThemedText numberOfLines={1} style={styles.title}>{title}</ThemedText>
             </ThemedView>
         </SafeAreaView>
     );
@@ -39,11 +39,12 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     title: {
-        fontSize: 20,
+        fontSize: 18,
         color: '#000',
         fontFamily:'Poppins-Medium',
         paddingTop:10,
-        paddingLeft:20
+        paddingLeft:10,
+        width:'80%'
     },
 });
 
