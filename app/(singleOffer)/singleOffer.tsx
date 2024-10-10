@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Card, Divider, Button, DataTable,} from 'react-native-paper';
 import {useLocalSearchParams} from 'expo-router';
 import {SmeIpoData} from '@/types/smeipo.interface';
@@ -18,12 +18,24 @@ const SingleOffer = () => {
     const [ipoData, setIpoData] = useState<SmeIpoData>(null);
     const {width} = useWindowDimensions();
     const navigation = useNavigation();
+    const scrollViewRef = useRef(null);
     useEffect(() => {
         if (params.item) {
             const parsedItem = JSON.parse(params.item as string);
             setIpoData(parsedItem);
         }
     }, [params.item]);
+
+    useEffect(() => {
+        const scrollToTop = () => {
+            if (scrollViewRef.current) {
+                scrollViewRef.current.scrollTo ({ y: 0, animated: false });
+            }
+        };
+
+        const unsubscribe = navigation.addListener('focus', scrollToTop);
+        return unsubscribe; // Cleanup listener on unmount
+    }, [navigation]);
 
     if (!ipoData) return null;
 
@@ -34,7 +46,7 @@ const SingleOffer = () => {
     return (
         <>
             <Header title={ipoData.title} onBackPress={() => navigation.goBack()} />
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView ref={scrollViewRef} showsVerticalScrollIndicator={false}>
                 <ThemedView style={styles.mainContainer}>
                     <Card style={styles.card}>
                         <ThemedView style={styles.mainBoardContainer}>
@@ -190,7 +202,7 @@ const SingleOffer = () => {
                         </ThemedView>
                     </Card>
                 </ThemedView>
-                {!ipoData.apply_now && (
+                {ipoData.apply_now && (
                     <ThemedView style={styles.shareButtonContainer}>
                         <ThemedButton onPress={() => openInAppBrowser(ipoData.apply_now)}
                                       title="Apply Now"
@@ -201,7 +213,7 @@ const SingleOffer = () => {
                                       contentStyle={{flexDirection: 'row-reverse'}} />
                     </ThemedView>
                 )}
-                {!ipoData.allotment_link && (
+                {ipoData.allotment_link && (
                     <ThemedView style={styles.shareButtonContainer}>
                         <ThemedButton onPress={() => openInAppBrowser(ipoData.allotment_link)}
                                       title="Allotment Check"
