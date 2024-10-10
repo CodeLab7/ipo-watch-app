@@ -27,7 +27,7 @@ const ThemedButton: React.FC<ThemedButtonProps> = ({
                                                    }) => {
     return (
         <Button onPress={onPress}
-                icon={icon ? () => icon : () => <FontAwesome5 name={iconName} size={20} color="#fff" />}
+                icon={icon ? () => icon : () => <FontAwesome5 name={iconName} size={20} color="#f45001" />}
                 mode="contained"
                 buttonColor={buttonColor}
                 textColor={textColor}
