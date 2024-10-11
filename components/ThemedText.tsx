@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     },
     defaultLight: {
         fontSize: 12,
-        color: '#000',
+        color: '#00273F',
         fontFamily: 'Poppins-Regular',
     },
     title: {
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         fontSize: 12,
-        color: '#000',
+        color: '#00273F',
         fontFamily: 'Poppins-Regular',
     },
     link: {

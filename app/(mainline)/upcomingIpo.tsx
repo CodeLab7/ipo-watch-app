@@ -69,7 +69,9 @@ export const UpcomingIpo: React.FC = () => {
                 </ThemedView>
             ) : (
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <BannerImage bannerData={bannerData} />
+                    <ThemedView style={styles.bannerContainer}>
+                        <BannerImage bannerData={bannerData} />
+                    </ThemedView>
                     {upcomingData?.map((item, index) => (
                         <Card key={index} style={styles.card}>
                             <TouchableRipple onPress={() => handleSingleOffer(item)}>

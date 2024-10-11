@@ -11,6 +11,7 @@ import BannerImage from "@/components/BannerImage";
 import ThemedButton from "@/components/ThemedButton";
 import {styles} from "@/assets/css/commonCss";
 import Loader from "@/components/Loader";
+import BannerAds from "@/components/BannerAds";
 
 const HomeScreen: React.FC = () => {
     const [gmpData, setGmpData] = useState<IPOData[]>([]);
@@ -63,7 +64,9 @@ const HomeScreen: React.FC = () => {
                 </ThemedView>
             ) : (
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <BannerImage bannerData={bannerData} />
+                    <ThemedView style={styles.bannerContainer}>
+                        <BannerImage bannerData={bannerData} />
+                    </ThemedView>
                     {gmpData?.map((item, index) => (
                         <Card key={index} style={styles.card}>
                             <ThemedView style={styles.mainBoardContainer}>
@@ -101,6 +104,7 @@ const HomeScreen: React.FC = () => {
                     ))}
                 </ScrollView>
             )}
+            <BannerAds/>
         </ThemedView>
     );
 }
