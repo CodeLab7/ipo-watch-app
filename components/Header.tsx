@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 18,
-        color: '#000',
+        color: '#00273F',
         fontFamily:'Poppins-Medium',
         paddingTop:10,
         paddingLeft:10,

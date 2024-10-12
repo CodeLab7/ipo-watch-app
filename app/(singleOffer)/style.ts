@@ -112,12 +112,12 @@ export const styles = StyleSheet.create({
     headerTitleText: {
         fontFamily: 'Poppins-Bold',
         fontSize: 13,
-        color: '#000',
+        color: '#00273F',
         textAlign:'left',
     },
     cellText: {
         fontFamily: 'Poppins-Regular',
-        color: '#000',
+        color: '#00273F',
         fontSize: 11,
     },
     btnDetailsLabel: {
