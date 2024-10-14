@@ -14,7 +14,7 @@ export default function TabLayout() {
     return (
         <Tabs screenOptions={{
             tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-            tabBarInactiveTintColor: '#000000',
+            tabBarInactiveTintColor: '#00273F',
             headerShown: true,
             tabBarLabelStyle: {fontSize: 13},
         }}>
@@ -23,7 +23,7 @@ export default function TabLayout() {
                              title: 'GMP',
                              headerTitle: 'LATEST IPO GMP',
                              headerLeft: () => (<IconButton icon="menu" onPress={() => navigation.dispatch(DrawerActions.openDrawer())} />),
-                             tabBarIcon: ({color}) => (<MaterialIcons name="handshake" color={color} size={30} />),
+                             tabBarIcon: ({color}) => (<MaterialIcons name="handshake" color={color} size={29} />),
                          }} />
             <Tabs.Screen name="mainline"
                          options={{
@@ -43,5 +43,5 @@ export default function TabLayout() {
     );
 }
 const styles = StyleSheet.create({
-    img: {height: 27, width: 27,}
+    img: {height: 25, width: 25,}
 })

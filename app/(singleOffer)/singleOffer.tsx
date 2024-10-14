@@ -5,7 +5,7 @@ import {SmeIpoData} from '@/types/smeipo.interface';
 import {ScrollView} from "react-native-gesture-handler";
 import {ThemedView} from "@/components/ThemedView";
 import {ThemedText} from "@/components/ThemedText";
-import {Image, Linking, useWindowDimensions} from "react-native";
+import {Image, Linking, useWindowDimensions, Animated} from "react-native";
 import {FontAwesome} from "@expo/vector-icons";
 import RenderHTML from "react-native-render-html";
 import Header from "@/components/Header";
@@ -126,7 +126,7 @@ const SingleOffer = () => {
                             <Divider style={styles.divider} />
                         </ThemedView>
                         <DataTable>
-                            <ThemedView>
+                            <ThemedView style={{borderColor:'#fff'}}>
                                 <DataTable.Header>
                                     <DataTable.Title> </DataTable.Title>
                                     <DataTable.Title textStyle={styles.headerTitleText} numeric>Revenues</DataTable.Title>
@@ -163,7 +163,7 @@ const SingleOffer = () => {
                             <Divider style={styles.divider} />
                         </ThemedView>
                         <ThemedView style={styles.subContainer}>
-                            <ThemedText type={'defaultSemiBold'} style={{fontFamily: 'Poppins-SemiBold', fontSize: 14}}>Company Promoter(s)</ThemedText>
+                            <ThemedText type={'defaultSemiBold'} style={{fontFamily: 'Poppins-SemiBold', fontSize: 14, paddingTop: 10}}>Company Promoter(s)</ThemedText>
                             <RenderHTML baseStyle={styles.renderHtmlFont} contentWidth={width} source={{html: ipoData.company_promoter}} defaultTextProps={{style: {fontFamily: 'Poppins-Regular'}}} />
                         </ThemedView>
                     </Card>
@@ -190,7 +190,7 @@ const SingleOffer = () => {
                         </ThemedView>
                     </Card>
                 </ThemedView>
-                {!ipoData.apply_now && (
+                {ipoData.apply_now && (
                     <ThemedView style={styles.shareButtonContainer}>
                         <ThemedButton onPress={() => openInAppBrowser(ipoData.apply_now)}
                                       title="Apply Now"
@@ -201,11 +201,11 @@ const SingleOffer = () => {
                                       contentStyle={{flexDirection: 'row-reverse'}} />
                     </ThemedView>
                 )}
-                {!ipoData.allotment_link && (
+                {ipoData.allotment_link && (
                     <ThemedView style={styles.shareButtonContainer}>
                         <ThemedButton onPress={() => openInAppBrowser(ipoData.allotment_link)}
                                       title="Allotment Check"
-                                      buttonColor="#000000"
+                                      buttonColor="#00273F"
                                       textColor="#fff"
                                       icon={<FontAwesome name="hand-o-right" size={22} color="#fff" />}
                                       labelStyle={styles.btnLabel}

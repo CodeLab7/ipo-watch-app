@@ -6,10 +6,11 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.bodyBackgroundColor,
     },
+    bannerContainer: {paddingTop: 7},
     card: {
         marginHorizontal: 10,
         marginVertical: 5,
-        borderRadius: 8,
+        borderRadius: 5,
         padding: 1.5,
         backgroundColor: Colors.bodyBackgroundColor,
     },

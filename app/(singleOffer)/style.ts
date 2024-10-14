@@ -6,12 +6,13 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.bodyBackgroundColor
     },
+    bannerMainConatainer:{paddingTop:7},
     card: {
         marginHorizontal: 10,
         marginVertical: 5,
-        borderRadius: 8,
-        elevation: 1,
+        borderRadius: 5,
         padding: 1.5,
+        backgroundColor: Colors.bodyBackgroundColor,
     },
     header: {
         alignItems: 'center',
@@ -24,7 +25,7 @@ export const styles = StyleSheet.create({
     companyName: {
         fontSize: 20,
         marginBottom: 8,
-        textAlign:'center',
+        textAlign: 'center',
     },
     offerDate: {
         fontSize: 14
@@ -37,7 +38,7 @@ export const styles = StyleSheet.create({
     img: {
         width: 180,
         height: 85,
-        resizeMode: 'contain'
+        resizeMode: 'cover'
     },
     mainBoardContainer: {
         flex: 1,
@@ -66,17 +67,17 @@ export const styles = StyleSheet.create({
         backgroundColor: Colors.dividerBgColor,
     },
     sectionTitle: {
-        fontSize: 20,
+        fontSize: 17,
         marginVertical: 10,
         textAlign: 'center',
     },
     divider: {
-        marginHorizontal: 16,
+        marginHorizontal: 10,
         backgroundColor: '#737373',
     },
     labelItemContainer: {
         flexDirection: 'row',
-        paddingVertical: 15,
+        paddingVertical: 7,
         paddingHorizontal: 10,
     },
     label: {
@@ -87,7 +88,7 @@ export const styles = StyleSheet.create({
     },
     subContainer: {
         paddingHorizontal: 10,
-        paddingVertical: 10
+        // paddingVertical: 10
     },
     shareButtonContainer: {
         flexDirection: "row",
@@ -106,15 +107,17 @@ export const styles = StyleSheet.create({
     },
     cellContainer: {
         marginVertical: -5,
+        alignItems:'flex-start'
     },
     headerTitleText: {
         fontFamily: 'Poppins-Bold',
         fontSize: 13,
-        color: '#000'
+        color: '#00273F',
+        textAlign:'left',
     },
     cellText: {
         fontFamily: 'Poppins-Regular',
-        color: '#000',
+        color: '#00273F',
         fontSize: 11,
     },
     btnDetailsLabel: {

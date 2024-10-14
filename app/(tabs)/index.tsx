@@ -63,7 +63,9 @@ const HomeScreen: React.FC = () => {
                 </ThemedView>
             ) : (
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <BannerImage bannerData={bannerData} />
+                    <ThemedView style={styles.bannerContainer}>
+                        <BannerImage bannerData={bannerData} />
+                    </ThemedView>
                     {gmpData?.map((item, index) => (
                         <Card key={index} style={styles.card}>
                             <ThemedView style={styles.mainBoardContainer}>

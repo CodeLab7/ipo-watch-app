@@ -21,7 +21,7 @@ export default function CustomDrawerContent() {
     const shareWithFriends = async () => {
         try {
             const options = {
-                message : "IPO Watch is an all-in-one IPO app to help investors get updates on Mainline IPO, SME IPO, Buyback, Right issues, NCD, IPO allotment, Reviews, and subscription. \nhttps://play.google.com/store/apps/details?id=com.watch.ipo_watch&hl=en_IN"
+                message: "IPO Watch is an all-in-one IPO app to help investors get updates on Mainline IPO, SME IPO, Buyback, Right issues, NCD, IPO allotment, Reviews, and subscription. \nhttps://play.google.com/store/apps/details?id=com.watch.ipo_watch&hl=en_IN"
             };
             await Share.share(options);
         } catch (e) {
@@ -40,7 +40,7 @@ export default function CustomDrawerContent() {
 
     const CustomIcon = ({name}: { name: React.ComponentProps<typeof Ionicons>['name'] }) => (
         <ThemedView style={styles.roundIconContainer}>
-            <Ionicons name={name} size={24} color="#000"/>
+            <Ionicons name={name} size={18} color="#000" />
         </ThemedView>
     );
 
@@ -56,41 +56,41 @@ export default function CustomDrawerContent() {
     }
 
     return (
-        <ThemedView style={{flex: 1}}>
+        <ThemedView style={{flex: 1, marginLeft: -15}}>
             <ThemedView style={styles.imgContainer}>
-                <Image style={styles.img} resizeMode={'contain'} source={require('../assets/images/logo.png')}/>
+                <Image style={styles.img} resizeMode={'contain'} source={require('../assets/images/logo.png')} />
             </ThemedView>
             <Drawer.Item label="Home"
-                         icon={() => <CustomIcon name="home"/>}
-                         onPress={() => router.push('/(tabs)/')}/>
+                         icon={() => <CustomIcon name="home" />}
+                         onPress={() => router.push('/(tabs)/')} />
             <Drawer.Item label="Share With Friends"
-                         icon={() => <CustomIcon name="share-social"/>}
-                         onPress={() => shareWithFriends()}/>
+                         icon={() => <CustomIcon name="share-social" />}
+                         onPress={() => shareWithFriends()} />
             <Drawer.Item label="Privacy Policy"
-                         icon={() => <CustomIcon name="shield-checkmark"/>}
-                         onPress={() => openInAppBrowser('https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/')}/>
+                         icon={() => <CustomIcon name="shield-checkmark" />}
+                         onPress={() => openInAppBrowser('https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/')} />
             <Drawer.Item label="Terms & Condition"
-                         icon={() => <CustomIcon name="book-sharp"/>}
-                         onPress={() => openInAppBrowser('https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/')}/>
+                         icon={() => <CustomIcon name="book-sharp" />}
+                         onPress={() => openInAppBrowser('https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/')} />
             <Drawer.Item label="Contact&nbsp;Us"
-                         icon={() => <CustomIcon name="document-text"/>}
-                         onPress={() => ContactUs()}/>
+                         icon={() => <CustomIcon name="document-text" />}
+                         onPress={() => ContactUs()} />
             <Drawer.Item label="Rate the App"
-                         icon={() => <CustomIcon name="star"/>}
-                         onPress={() => openInAppBrowser('https://play.google.com/store/apps/details?id=com.watch.ipo_watch&hl=en_IN')}/>
+                         icon={() => <CustomIcon name="star" />}
+                         onPress={() => openInAppBrowser('https://play.google.com/store/apps/details?id=com.watch.ipo_watch&hl=en_IN')} />
 
             <ThemedView style={styles.socialIconContainer}>
                 <TouchableRipple onPress={() => openInAppBrowser(socialMediaLinks.facebook)}>
-                    <Avatar.Image size={40} style={styles.iconImg} source={require('../assets/icons/facebook.png')}/>
+                    <Avatar.Image size={35} style={styles.iconImg} source={require('../assets/icons/facebook.png')} />
                 </TouchableRipple>
                 <TouchableRipple onPress={() => openInAppBrowser(socialMediaLinks.instagram)}>
-                    <Avatar.Image size={40} style={styles.iconImg} source={require('../assets/icons/instagram.png')}/>
+                    <Avatar.Image size={35} style={styles.iconImg} source={require('../assets/icons/instagram.png')} />
                 </TouchableRipple>
                 <TouchableRipple onPress={() => openInAppBrowser(socialMediaLinks.youtube)}>
-                    <Avatar.Image size={40} style={styles.iconImg} source={require('../assets/icons/youtube.png')}/>
+                    <Avatar.Image size={35} style={styles.iconImg} source={require('../assets/icons/youtube.png')} />
                 </TouchableRipple>
                 <TouchableRipple onPress={() => openInAppBrowser(socialMediaLinks.x)}>
-                    <Avatar.Image size={40} style={styles.iconImg} source={require('../assets/icons/x.png')}/>
+                    <Avatar.Image size={35} style={styles.iconImg} source={require('../assets/icons/x.png')} />
                 </TouchableRipple>
             </ThemedView>
             <ThemedView style={styles.versionText}>
@@ -105,13 +105,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     img: {
-        height: 90,
+        height: 75,
         marginTop: 70,
         marginBottom: 20,
     },
     roundIconContainer: {
-        width: 40,
-        height: 43,
+        width: 30,
+        height: 30,
         borderRadius: 20,
         backgroundColor: '#fff',
         justifyContent: 'center',
@@ -127,12 +127,13 @@ const styles = StyleSheet.create({
     socialIconContainer: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        maxHeight:40,
-        marginVertical: 30
+        maxHeight: 40,
+        marginVertical: 30,
+        marginHorizontal: 20,
     },
     iconImg: {
         backgroundColor: '#fff',
+        marginHorizontal: 10,
     },
     versionText: {
         flex: 1,

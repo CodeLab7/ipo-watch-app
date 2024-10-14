@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     labelStyle: {
-        color: 'black',
+        color: '#00273F',
         fontSize: 16,
         paddingBottom: 3,
     },
