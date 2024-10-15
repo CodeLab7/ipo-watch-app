@@ -19,7 +19,11 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-0303999446867229/1549402340"
+      },
+      "package": "com.watch.ipo_watch"
     },
     "web": {
       "bundler": "metro",

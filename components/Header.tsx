@@ -1,10 +1,11 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {ThemedView} from '@/components/ThemedView';
 import {ThemedText} from '@/components/ThemedText';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {StatusBar} from "expo-status-bar";
+import {TouchableRipple} from "react-native-paper";
 
 interface HeaderProps {
     title: string;
@@ -16,9 +17,9 @@ const Header: React.FC<HeaderProps> = ({title, onBackPress}) => {
         <SafeAreaView>
             <StatusBar backgroundColor={'#fff'} />
             <ThemedView style={styles.headerContainer}>
-                <TouchableOpacity onPress={onBackPress} style={styles.iconContainer}>
-                    <Ionicons name="arrow-back-sharp" size={30} color="black" />
-                </TouchableOpacity>
+                <TouchableRipple onPress={onBackPress} style={styles.iconContainer}>
+                    <Ionicons name="arrow-back-sharp" size={30} color="black"/>
+                </TouchableRipple>
                 <ThemedText numberOfLines={1} style={styles.title}>{title}</ThemedText>
             </ThemedView>
         </SafeAreaView>
@@ -41,10 +42,10 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 18,
         color: '#00273F',
-        fontFamily:'Poppins-Medium',
-        paddingTop:10,
-        paddingLeft:10,
-        width:'80%'
+        fontFamily: 'Poppins-Medium',
+        paddingTop: 10,
+        paddingLeft: 10,
+        width: '80%'
     },
 });
 

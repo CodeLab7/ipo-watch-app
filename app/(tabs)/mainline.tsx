@@ -5,6 +5,7 @@ import {StyleSheet} from 'react-native';
 import {UpcomingIpo} from "@/app/(mainline)/upcomingIpo";
 import {ListedIpo} from "@/app/(mainline)/listedIpo";
 import {ThemedText} from "@/components/ThemedText";
+import MyBannerAd from "@/components/AdvBanner";
 
 const MainlineScreen: React.FC = () => {
     const [index, setIndex] = useState(0);
@@ -20,21 +21,24 @@ const MainlineScreen: React.FC = () => {
     });
 
     return (
-        <TabView
-            navigationState={{index, routes}}
-            renderScene={renderScene}
-            onIndexChange={setIndex}
-            renderTabBar={(props) => (
-                <TabBar
-                    {...props}
-                    indicatorStyle={styles.indicatorStyle}
-                    style={styles.tabBarStyle}
-                    renderLabel={({route}) => (
-                        <ThemedText style={styles.labelStyle} type={'subtitle'}> {route.title} </ThemedText>
-                    )}
-                />
-            )}
-        />
+        <>
+            <TabView
+                navigationState={{index, routes}}
+                renderScene={renderScene}
+                onIndexChange={setIndex}
+                renderTabBar={(props) => (
+                    <TabBar
+                        {...props}
+                        indicatorStyle={styles.indicatorStyle}
+                        style={styles.tabBarStyle}
+                        renderLabel={({route}) => (
+                            <ThemedText style={styles.labelStyle} type={'subtitle'}> {route.title} </ThemedText>
+                        )}
+                    />
+                )}
+            />
+            <MyBannerAd />
+        </>
     );
 }
 
