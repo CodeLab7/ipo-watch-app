@@ -9,7 +9,7 @@ export default function MyBannerAd() {
             <ThemedText type={'title'}>My Banner Ad</ThemedText>
             <AdMobBanner
                 bannerSize="fullBanner"
-                adUnitID="ca-app-pub-3940256099942544/6300978111"
+                adUnitID="ca-app-pub-0303999446867229/1549402340"
                 servePersonalizedAds // true or false
                 onDidFailToReceiveAdWithError={(error) => console.error(error)}
             />
