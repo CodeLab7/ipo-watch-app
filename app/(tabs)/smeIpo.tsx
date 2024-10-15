@@ -4,6 +4,8 @@ import {UpcomingIpo} from "@/app/(smeipo)/upcomingIpo";
 import {SceneMap, TabBar, TabView} from "react-native-tab-view";
 import {StyleSheet} from 'react-native';
 import {ThemedText} from "@/components/ThemedText";
+import MyBannerAd from "@/components/AdvBanner";
+import * as React from "react";
 
 const SmoIpoScreen = () => {
     const [index, setIndex] = useState(0);
@@ -18,21 +20,24 @@ const SmoIpoScreen = () => {
         listed: ListedIpo,
     });
     return (
-        <TabView
-            navigationState={{index, routes}}
-            renderScene={renderScene}
-            onIndexChange={setIndex}
-            renderTabBar={(props) => (
-                <TabBar
-                    {...props}
-                    indicatorStyle={styles.indicatorStyle}
-                    style={styles.tabBarStyle}
-                    renderLabel={({route}) => (
-                        <ThemedText style={styles.labelStyle} type={'subtitle'}> {route.title} </ThemedText>
-                    )}
-                />
-            )}
-        />
+        <>
+            <TabView
+                navigationState={{index, routes}}
+                renderScene={renderScene}
+                onIndexChange={setIndex}
+                renderTabBar={(props) => (
+                    <TabBar
+                        {...props}
+                        indicatorStyle={styles.indicatorStyle}
+                        style={styles.tabBarStyle}
+                        renderLabel={({route}) => (
+                            <ThemedText style={styles.labelStyle} type={'subtitle'}> {route.title} </ThemedText>
+                        )}
+                    />
+                )}
+            />
+            <MyBannerAd />
+        </>
     );
 }
 

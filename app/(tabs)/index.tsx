@@ -11,6 +11,7 @@ import BannerImage from "@/components/BannerImage";
 import ThemedButton from "@/components/ThemedButton";
 import {styles} from "@/assets/css/commonCss";
 import Loader from "@/components/Loader";
+import MyBannerAd from "@/components/AdvBanner";
 
 const HomeScreen: React.FC = () => {
     const [gmpData, setGmpData] = useState<IPOData[]>([]);
@@ -103,6 +104,7 @@ const HomeScreen: React.FC = () => {
                     ))}
                 </ScrollView>
             )}
+            <MyBannerAd/>
         </ThemedView>
     );
 }
